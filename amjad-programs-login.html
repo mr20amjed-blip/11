@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#070914">
+  <title>AMJAD PROGRAMS | تسجيل الدخول</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --bg: #070914;
+      --panel: rgba(12, 18, 38, .88);
+      --muted: #aab5ca;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 22px;
+      color: #fff;
+      background: var(--bg);
+      font-family: Tahoma, Arial, sans-serif;
+    }
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -3;
+      background:
+        radial-gradient(ellipse at 12% 18%, rgba(239, 35, 75, .25), transparent 34%),
+        radial-gradient(ellipse at 88% 76%, rgba(37, 99, 235, .28), transparent 35%),
+        radial-gradient(ellipse at 52% 105%, rgba(250, 204, 21, .15), transparent 35%),
+        #070914;
+      animation: backgroundShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes backgroundShift {
+      0% { filter: hue-rotate(0deg); transform: scale(1); }
+      100% { filter: hue-rotate(24deg); transform: scale(1.07); }
+    }
+    .grid {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      opacity: .13;
+      background-image:
+        linear-gradient(rgba(148,163,184,.28) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148,163,184,.28) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+      pointer-events: none;
+    }
+    .glow {
+      position: fixed;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .22;
+      z-index: -1;
+      pointer-events: none;
+      animation: drift 12s ease-in-out infinite alternate;
+    }
+    .glow.red { background: #ff1744; top: -90px; left: -70px; }
+    .glow.blue { background: #1769ff; bottom: -100px; right: -60px; animation-delay: -4s; }
+    .glow.yellow { background: #facc15; bottom: 18%; left: 15%; opacity: .12; animation-delay: -7s; }
+    @keyframes drift {
+      to { transform: translate(70px, 55px) scale(1.25); }
+    }
+    .falling-lights {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .particle {
+      position: absolute;
+      top: -25px;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      0% { transform: translate3d(0, -20px, 0); opacity: 0; }
+      12% { opacity: .9; }
+      85% { opacity: .55; }
+      100% { transform: translate3d(35px, 110vh, 0); opacity: 0; }
+    }
+    .card {
+      width: min(100%, 420px);
+      position: relative;
+      padding: 38px 28px 27px;
+      text-align: center;
+      border-radius: 27px;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.15);
+      box-shadow:
+        0 0 35px rgba(37,99,235,.18),
+        0 0 75px rgba(239,35,75,.10),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+    .top-line {
+      width: 82px;
+      height: 4px;
+      margin: 0 auto 24px;
+      border-radius: 20px;
+      background: linear-gradient(90deg, #ff1744, #ffea00, #00d9ff, #a855f7);
+      background-size: 250% 100%;
+      animation: lineFlow 3s linear infinite;
+      box-shadow: 0 0 18px rgba(56,189,248,.55);
+    }
+    @keyframes lineFlow { to { background-position: 250% 0; } }
+    .logo {
+      margin: 0;
+      font-size: clamp(27px, 7vw, 36px);
+      line-height: 1.25;
+      font-weight: 1000;
+      letter-spacing: 1.5px;
+      background: linear-gradient(90deg, #ff1744, #ffea00, #00e5ff, #a855f7, #ff1744);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow 4s linear infinite;
+      filter: drop-shadow(0 0 12px rgba(37,139,255,.35));
+    }
+    .arabic-logo {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 25px;
+      font-weight: 900;
+      background: linear-gradient(90deg, #ff1744, #ffea00, #00e5ff, #a855f7, #ff1744);
+      background-size: 300% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow 4s linear infinite;
+    }
+    @keyframes rainbow {
+      0% { background-position: 0% center; }
+      100% { background-position: 300% center; }
+    }
+    .tagline {
+      margin: 12px 0 27px;
+      color: #93a4c2;
+      font-size: 10px;
+      letter-spacing: 3px;
+      direction: ltr;
+    }
+    .lock-icon {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 19px;
+      display: grid;
+      place-items: center;
+      border-radius: 23px;
+      font-size: 35px;
+      background: linear-gradient(145deg, rgba(35,55,94,.9), rgba(13,22,44,.9));
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 0 28px rgba(37,99,235,.25), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+    .online {
+      margin-bottom: 13px;
+      color: #6ee7a0;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+    }
+    h2 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      font-weight: 800;
+    }
+    .description {
+      margin: 0 0 23px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .password {
+      width: 100%;
+      height: 55px;
+      padding: 0 16px;
+      border: 1px solid rgba(148,163,184,.38);
+      border-radius: 13px;
+      outline: none;
+      background: rgba(3,8,22,.82);
+      color: white;
+      text-align: center;
+      font-size: 18px;
+      transition: .25s;
+    }
+    .password::placeholder { color: #71809d; font-size: 14px; }
+    .password:focus {
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56,189,248,.10), 0 0 20px rgba(37,99,235,.22);
+    }
+    .enter {
+      width: 100%;
+      min-height: 54px;
+      margin-top: 16px;
+      border: 0;
+      border-radius: 13px;
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      background: linear-gradient(100deg, #e11d48, #7c3aed, #2563eb);
+      background-size: 200% 100%;
+      box-shadow: 0 8px 25px rgba(37,99,235,.25);
+      transition: transform .2s, filter .2s, background-position .4s;
+    }
+    .enter:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.15);
+      background-position: 100% 0;
+    }
+    .enter:active { transform: scale(.99); }
+    #message {
+      min-height: 20px;
+      margin: 12px 0 0;
+      color: #fb7185;
+      font-size: 12px;
+    }
+    .lockout {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+      background: rgba(4, 5, 13, .97);
+      backdrop-filter: blur(16px);
+    }
+    .lockout.show { display: flex; }
+    .warning-box {
+      width: min(100%, 390px);
+      padding: 34px 24px;
+      border: 1px solid rgba(248, 50, 75, .55);
+      border-radius: 24px;
+      background: linear-gradient(145deg, #1b0b18, #0b1020);
+      box-shadow: 0 0 35px rgba(239, 35, 75, .30);
+    }
+    .big-x {
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 22px;
+      display: grid;
+      place-items: center;
+      border: 4px solid #ff294f;
+      border-radius: 50%;
+      color: #ff294f;
+      font-size: 82px;
+      font-weight: 300;
+      line-height: 1;
+      text-shadow: 0 0 22px rgba(255, 41, 79, .8);
+      box-shadow: 0 0 30px rgba(255, 41, 79, .3), inset 0 0 22px rgba(255, 41, 79, .12);
+    }
+    .warning-title {
+      margin: 0 0 12px;
+      color: #ff4968;
+      font-size: 25px;
+    }
+    .warning-text {
+      margin: 0;
+      color: #d5d9e5;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .warning-hint {
+      margin-top: 20px;
+      color: #facc15;
+      font-size: 12px;
+    }
+    .footer {
+      margin-top: 23px;
+      padding-top: 17px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      color: #71809d;
+      font-size: 10px;
+      letter-spacing: 1.8px;
+      direction: ltr;
+    }
+    @media (max-width: 420px) {
+      body { padding: 17px; }
+      .card { padding: 32px 22px 24px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="background"></div>
+  <div class="grid"></div>
+  <div class="glow red"></div>
+  <div class="glow blue"></div>
+  <div class="glow yellow"></div>
+  <div class="falling-lights" id="fallingLights"></div>
+
+  <section class="lockout" id="lockout" role="alert" aria-live="assertive">
+    <div class="warning-box">
+      <div class="big-x">×</div>
+      <h2 class="warning-title">تم إيقاف الدخول</h2>
+      <p class="warning-text">الرمز السري غير صحيح.<br>تم قفل شاشة الموقع للحماية.</p>
+      <div class="warning-hint">أعد تحميل الصفحة (Refresh) للبدء من جديد</div>
+    </div>
+  </section>
+
+  <main class="card">
+    <div class="top-line"></div>
+    <h1 class="logo">AMJAD PROGRAMS</h1>
+    <div class="arabic-logo">أمجد للبرامج</div>
+    <div class="tagline">SOFTWARE &amp; TECHNOLOGY</div>
+
+    <div class="lock-icon" aria-hidden="true">🔐</div>
+    <div class="online">● SYSTEM ONLINE</div>
+    <h2>مرحباً بك</h2>
+    <p class="description">أدخل الرمز السري للمتابعة إلى الموقع</p>
+
+    <form id="loginForm">
+      <input
+        class="password"
+        id="password"
+        type="password"
+        placeholder="أدخل الرمز السري"
+        autocomplete="current-password"
+        aria-label="الرمز السري"
+        required
+      >
+      <button class="enter" type="submit">دخول إلى الموقع&nbsp; ←</button>
+      <p id="message" role="alert" aria-live="polite"></p>
+    </form>
+
+    <div class="footer">AMJAD PROGRAMS © 2026</div>
+  </main>
+
+  <script>
+    // رمز الدخول المطلوب: A كبيرة وباقي الأحرف صغيرة.
+    const ACCESS_CODE = "Amjed";
+
+    document.getElementById("loginForm").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const entered = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (entered === ACCESS_CODE) {
+        sessionStorage.setItem("amjadLogin", "yes");
+        // عند تجهيز الصفحة الرئيسية، غيّر index.html إلى اسم ملفها إذا لزم.
+        window.location.href = "index.html?home=1";
+      } else {
+        // أي رمز خاطئ يقفل شاشة الدخول بالكامل حتى إعادة تحميل الصفحة.
+        document.getElementById("lockout").classList.add("show");
+        document.getElementById("password").disabled = true;
+        document.querySelector(".enter").disabled = true;
+        document.body.style.overflow = "hidden";
+      }
+    });
+
+    // أضواء صغيرة نازلة بألوان متغيرة.
+    const container = document.getElementById("fallingLights");
+    const colors = ["#38bdf8", "#fb3158", "#facc15", "#a78bfa", "#ffffff"];
+
+    for (let i = 0; i < 34; i++) {
+      const particle = document.createElement("span");
+      particle.className = "particle";
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      particle.style.left = Math.random() * 100 + "%";
+      particle.style.animationDuration = (5 + Math.random() * 9) + "s";
+      particle.style.animationDelay = (-Math.random() * 12) + "s";
+      particle.style.background = color;
+      particle.style.boxShadow = "0 0 10px 2px " + color;
+      particle.style.width = (2 + Math.random() * 2) + "px";
+      particle.style.height = particle.style.width;
+      container.appendChild(particle);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#070914">
+<title>AMJAD PROGRAMS | أمجد للبرامج</title>
+<style>
+:root{--bg:#060814;--panel:rgba(12,18,38,.78);--line:rgba(255,255,255,.12);--muted:#9aa9c3}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Tahoma,Arial,sans-serif;overflow-x:hidden}
+.ambient{position:fixed;inset:0;z-index:-5;background:
+ radial-gradient(ellipse at 15% 15%,rgba(239,35,75,.23),transparent 32%),
+ radial-gradient(ellipse at 88% 70%,rgba(37,99,235,.25),transparent 35%),
+ radial-gradient(ellipse at 48% 105%,rgba(250,204,21,.13),transparent 34%),#060814;
+ animation:hue 13s ease-in-out infinite alternate}
+@keyframes hue{to{filter:hue-rotate(25deg);transform:scale(1.04)}}
+.gridbg{position:fixed;inset:0;z-index:-4;opacity:.11;pointer-events:none;background-image:linear-gradient(#94a3b8 1px,transparent 1px),linear-gradient(90deg,#94a3b8 1px,transparent 1px);background-size:48px 48px;mask-image:linear-gradient(transparent,#000 15%,#000 85%,transparent)}
+.glow{position:fixed;width:300px;height:300px;border-radius:50%;filter:blur(110px);opacity:.19;z-index:-3;pointer-events:none;animation:float 12s ease-in-out infinite alternate}
+.glow.r{background:#ff1744;top:-130px;left:8%}.glow.b{background:#1769ff;bottom:-130px;right:10%;animation-delay:-5s}.glow.y{background:#facc15;top:45%;left:42%;opacity:.09;animation-delay:-8s}
+@keyframes float{to{transform:translate(80px,55px) scale(1.25)}}
+.particles{position:fixed;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.particle{position:absolute;top:-20px;width:3px;height:3px;border-radius:50%;opacity:0;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-15px);opacity:0}12%{opacity:.85}85%{opacity:.5}100%{transform:translate(30px,110vh);opacity:0}}
+.topbar{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 34px;border-bottom:1px solid var(--line);background:rgba(4,8,20,.52);backdrop-filter:blur(15px);position:sticky;top:0;z-index:10}
+.brand-small{font-weight:1000;letter-spacing:1.2px;font-size:18px;background:linear-gradient(90deg,#ff315b,#ffe34a,#20d7ff,#b16cff,#ff315b);background-size:300%;color:transparent;background-clip:text;animation:rgb 5s linear infinite;direction:ltr}
+@keyframes rgb{to{background-position:300% center}}
+.top-actions{display:flex;align-items:center;gap:12px;color:#9eabc2;font-size:12px}
+.status{color:#72f0a8;border:1px solid #2c9d6855;background:#12332466;border-radius:30px;padding:7px 12px}
+.layout{max-width:1500px;margin:auto;display:grid;grid-template-columns:225px minmax(0,1fr);gap:24px;padding:24px}
+.sidebar{align-self:start;position:sticky;top:94px;padding:16px 12px;border:1px solid #ffffff1c;border-radius:22px;background:rgba(7,13,29,.72);backdrop-filter:blur(18px);box-shadow:0 0 30px #2563eb18}
+.side-brand{text-align:center;padding:12px 8px 20px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.side-brand .mark{font-size:30px}
+.side-brand strong{display:block;margin-top:7px;font-size:15px;direction:ltr;background:linear-gradient(90deg,#ff315b,#ffdf45,#31cfff);background-size:200%;color:transparent;background-clip:text;animation:rgb 4s linear infinite}
+.side-brand small{display:block;color:#8291ac;margin-top:5px}
+.nav{display:grid;gap:7px}
+.nav a{color:#cbd5e1;text-decoration:none;padding:12px 11px;border-radius:12px;display:flex;gap:11px;align-items:center;font-size:13px;border:1px solid transparent;transition:.25s}
+.nav a:hover,.nav a.active{color:white;border-color:#5c7dff55;background:linear-gradient(100deg,#e11d4822,#2563eb22);box-shadow:inset 0 0 18px #2563eb18,0 0 15px #2563eb19}
+.nav .ico{width:25px;text-align:center;font-size:18px}
+.main{min-width:0}
+.hero{position:relative;text-align:center;padding:34px 18px 22px;border:1px solid #ffffff16;border-radius:25px;background:linear-gradient(135deg,rgba(12,19,42,.7),rgba(8,12,27,.45));overflow:hidden;box-shadow:0 15px 50px #0005}
+.hero:before{content:"";position:absolute;inset:-2px;background:conic-gradient(from 0deg,transparent 0 70%,#23cfff66 78%,#ff2b5b77 84%,#ffe34a66 90%,transparent 96%);filter:blur(24px);opacity:.38;animation:spin 12s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero-inner{position:relative}
+.crown{font-size:34px;filter:drop-shadow(0 0 12px #facc15aa)}
+.hero h1{margin:5px 0 0;font-size:clamp(32px,5vw,58px);font-weight:1000;letter-spacing:1px;direction:ltr;background:linear-gradient(90deg,#ff315b,#ffe34a,#25d8ff,#a855f7,#ff315b);background-size:300%;color:transparent;background-clip:text;animation:rgb 5s linear infinite;filter:drop-shadow(0 0 14px #278bff33)}
+.arabic-title{font-size:clamp(24px,3vw,36px);font-weight:900;color:#f8d65b;text-shadow:0 0 18px #facc1566;margin-top:4px}
+.tagline{color:#c3cee2;direction:ltr;letter-spacing:2px;font-size:12px;margin-top:13px}
+.tagline b{color:#facc15;margin:0 8px}
+.search-wrap{max-width:760px;margin:25px auto 0;display:flex;align-items:center;gap:12px;padding:5px 17px;border-radius:40px;background:rgba(4,9,23,.88);border:1px solid transparent;background-clip:padding-box;position:relative;box-shadow:0 0 0 1px #38bdf855,0 0 23px #b026ff33}
+.search-wrap:before{content:"";position:absolute;inset:-2px;border-radius:40px;padding:2px;background:linear-gradient(90deg,#ff2c85,#28dfff,#ffe34a,#a855f7,#ff2c85);background-size:250%;animation:rgb 4s linear infinite;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;pointer-events:none}
+.search-wrap span{font-size:23px;color:#bfeeff}
+.search-wrap input{width:100%;height:43px;border:0;outline:0;background:transparent;color:white;font-size:14px;font-family:inherit}
+.search-wrap input::placeholder{color:#8291ac}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin:29px 2px 15px}
+.section-head h2{font-size:19px;margin:0}
+.section-head p{font-size:11px;color:#8796b1;margin:6px 0 0}
+.pc-tag{font-size:10px;letter-spacing:1px;color:#a5dfff;border:1px solid #38bdf855;padding:7px 11px;border-radius:30px;background:#0c274044;direction:ltr}
+.tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.tile{--accent:#38bdf8;--rgb:rgba(56,189,248,.45);min-height:195px;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;text-decoration:none;color:white;padding:22px 14px 18px;border-radius:19px;background:linear-gradient(145deg,rgba(16,28,52,.95),rgba(5,10,24,.94));border:1px solid color-mix(in srgb,var(--accent) 75%,transparent);box-shadow:inset 0 0 25px var(--rgb),0 0 15px var(--rgb);overflow:hidden;transition:transform .28s,box-shadow .28s,border-color .28s;isolation:isolate}
+.tile:before{content:"";position:absolute;inset:-2px;background:linear-gradient(125deg,transparent 20%,var(--accent),transparent 48%);opacity:.12;transform:translateX(-100%);transition:transform .7s;z-index:-1}
+.tile:after{content:"";position:absolute;inset:5px;border-radius:15px;border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);pointer-events:none}
+.tile:hover{transform:translateY(-7px) scale(1.015);box-shadow:inset 0 0 35px var(--rgb),0 0 30px var(--rgb);border-color:var(--accent)}
+.tile:hover:before{transform:translateX(100%)}
+.tile .icon{font-size:43px;line-height:1.2;margin-bottom:12px;filter:drop-shadow(0 0 10px var(--accent))}
+.tile strong{font-size:16px}
+.tile small{direction:ltr;color:#c2cde0;font-size:12px;margin-top:7px}
+.tile .soon{font-size:10px;color:var(--accent);margin-top:13px;letter-spacing:.5px}
+.cyan{--accent:#26d9ff;--rgb:rgba(38,217,255,.22)}
+.gold{--accent:#ffc83d;--rgb:rgba(255,200,61,.2)}
+.red{--accent:#ff456b;--rgb:rgba(255,69,107,.2)}
+.purple{--accent:#c35cff;--rgb:rgba(195,92,255,.2)}
+.blue{--accent:#398cff;--rgb:rgba(57,140,255,.2)}
+.green{--accent:#4cff86;--rgb:rgba(76,255,134,.18)}
+.teal{--accent:#00e4d0;--rgb:rgba(0,228,208,.18)}
+.pink{--accent:#ff55c8;--rgb:rgba(255,85,200,.18)}
+
+.detail-view{display:none;animation:enterView .35s ease both}
+.detail-view.active{display:block}
+@keyframes enterView{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.back-row{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px}
+.back-btn{border:1px solid #38bdf866;background:#0b1a32;color:#d9f4ff;padding:10px 16px;border-radius:12px;cursor:pointer;font-family:inherit;transition:.2s}
+.back-btn:hover{box-shadow:0 0 18px #258cff55;border-color:#38bdf8}
+.detail-hero{padding:35px 20px 28px;text-align:center;border:1px solid #ffffff1c;border-radius:23px;background:linear-gradient(145deg,rgba(13,24,48,.9),rgba(7,12,28,.82));box-shadow:0 0 32px #2563eb20;position:relative;overflow:hidden}
+.detail-icon{width:100px;height:100px;margin:0 auto 15px;border-radius:27px;display:grid;place-items:center;font-size:53px;background:linear-gradient(145deg,#142b4d,#0a142b);border:1px solid #38d9ff77;box-shadow:0 0 30px #21cfff33,inset 0 0 22px #21cfff22}
+.detail-hero h2{font-size:27px;margin:0;background:linear-gradient(90deg,#ff315b,#ffe34a,#26d9ff,#b16cff);background-size:250%;color:transparent;background-clip:text;animation:rgb 5s linear infinite}
+.detail-hero p{color:#aab8d0;font-size:13px;margin:10px 0 0}
+.detail-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}
+.detail-action{min-height:112px;border:1px solid #38bdf855;border-radius:16px;background:linear-gradient(145deg,rgba(13,29,55,.95),rgba(6,12,27,.95));color:#fff;padding:17px 12px;cursor:pointer;font-family:inherit;transition:.25s;box-shadow:inset 0 0 20px #238bff12,0 0 12px #238bff12}
+.detail-action:hover{transform:translateY(-4px);border-color:#38dfff;box-shadow:0 0 24px #24cfff44,inset 0 0 25px #238bff22}
+.detail-action .action-icon{display:block;font-size:28px;margin-bottom:10px}
+.detail-action strong{display:block;font-size:14px}
+.detail-action small{display:block;color:#91a5c4;font-size:10px;margin-top:6px}
+.detail-message{display:none;margin-top:18px;padding:13px 16px;border:1px solid #facc1555;border-radius:12px;background:#3a2b092e;color:#f8df8a;font-size:12px;line-height:1.8}
+.detail-message.show{display:block}
+@media(max-width:760px){.detail-actions{grid-template-columns:repeat(2,minmax(0,1fr))}.detail-hero{padding:27px 15px}.detail-hero h2{font-size:23px}}
+@media(max-width:390px){.detail-actions{grid-template-columns:1fr 1fr}.detail-action{min-height:100px}}
+
+
+.remote-items{margin-top:22px;padding:20px;border:1px solid #ffffff18;border-radius:19px;background:rgba(8,14,29,.72);box-shadow:0 0 25px #2563eb14}
+.remote-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
+.remote-head h2{font-size:18px;margin:0}.remote-head span{color:#9ab0ce;font-size:10px}
+.remote-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.remote-card{border:1px solid #38bdf855;border-radius:14px;padding:14px;background:linear-gradient(145deg,#12213b,#080e20);box-shadow:inset 0 0 18px #258cff12;min-width:0}
+.remote-card .r-icon{font-size:27px;margin-bottom:8px}.remote-card strong{display:block;font-size:13px}.remote-card p{color:#9fb0ca;font-size:11px;line-height:1.7;min-height:32px;overflow-wrap:anywhere}
+.remote-card a{display:inline-block;margin-top:7px;padding:9px 13px;border-radius:9px;text-decoration:none;color:white;font-size:11px;font-weight:bold;background:linear-gradient(100deg,#e11d48,#2563eb)}
+.remote-empty{color:#9aa9c3;font-size:12px;padding:10px 0}
+@media(max-width:760px){.remote-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+.note{margin-top:22px;padding:15px 18px;border:1px solid #ffffff17;border-radius:15px;background:rgba(8,14,29,.62);color:#aab6ca;font-size:12px;line-height:1.9}
+.note b{color:#facc15}
+.footer{margin-top:26px;padding:17px 8px;border-top:1px solid #ffffff18;display:flex;justify-content:space-between;gap:12px;align-items:center;color:#8492aa;font-size:11px;direction:ltr}
+.footer .rgbline{height:2px;flex:1;max-width:260px;background:linear-gradient(90deg,#ff315b,#ffe34a,#26d9ff,#a855f7);background-size:250%;animation:rgb 4s linear infinite;box-shadow:0 0 12px #28cfff66}
+.no-results{display:none;text-align:center;color:#b8c4d8;padding:25px}
+@media(max-width:1100px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.layout{grid-template-columns:190px minmax(0,1fr);gap:16px;padding:16px}}
+@media(max-width:760px){.topbar{padding:0 16px}.layout{display:block;padding:13px}.sidebar{position:relative;top:auto;margin-bottom:14px;padding:9px}.side-brand{display:none}.nav{display:flex;overflow-x:auto;gap:5px}.nav a{white-space:nowrap;padding:10px;font-size:11px}.nav .ico{font-size:15px;width:auto}.hero{padding:26px 12px 18px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile{min-height:155px;padding:16px 9px}.tile .icon{font-size:35px}.tile strong{font-size:13px}.tile small{font-size:10px}.section-head h2{font-size:16px}.top-actions .date{display:none}}
+@media(max-width:390px){.tiles{grid-template-columns:1fr 1fr}.brand-small{font-size:15px}.arabic-title{font-size:23px}}
+</style>
+</head>
+<body>
+<div class="ambient"></div><div class="gridbg"></div>
+<div class="glow r"></div><div class="glow b"></div><div class="glow y"></div>
+<div class="particles" id="particles"></div>
+
+<header class="topbar">
+  <div class="brand-small">AMJAD PROGRAMS</div>
+  <div class="top-actions"><span class="date">بوابة البرامج والأدوات للحاسوب</span><span class="status">● SYSTEM ONLINE</span></div>
+</header>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-brand"><div class="mark">💠</div><strong>AMJAD PROGRAMS</strong><small>مركز البرامج والأدوات</small></div>
+    <nav class="nav">
+      <a class="active" href="#home"><span class="ico">⌂</span> الرئيسية</a>
+      <a href="#tools"><span class="ico">▦</span> جميع الأدوات</a>
+      <a href="#drivers"><span class="ico">⇩</span> التعريفات</a>
+      <a href="#maintenance"><span class="ico">⚒</span> أدوات الصيانة</a>
+      <a href="#links"><span class="ico">↗</span> روابط ضرورية</a>
+    </nav>
+  </aside>
+
+  <main class="main" id="home">
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="crown">♛</div>
+        <h1>AMJAD PROGRAMS</h1>
+        <div class="arabic-title">أمجد للبرامج</div>
+        <div class="tagline">PC SOFTWARE <b>•</b> TOOLS <b>•</b> DRIVERS <b>•</b> USEFUL LINKS</div>
+        <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن أداة أو تعريف أو برنامج..." autocomplete="off"></label>
+      </div>
+    </section>
+
+    <div class="section-head" id="tools">
+      <div><h2>مركز البرامج والأدوات</h2><p>اختر الواجهة المناسبة، وسنضيف محتواها حسب قائمتك</p></div>
+      <span class="pc-tag">▣ DESKTOP EXPERIENCE</span>
+    </div>
+
+    <section class="tiles" id="tileGrid">
+      <a class="tile cyan" id="drivers" href="#drivers" data-open="drivers" data-search="تعريفات الحاسبة اللابتوب drivers">
+        <span class="icon">🖥️</span><strong>تعريفات الحاسبة</strong><small>PC Drivers</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile gold" href="#essential" data-search="برامج مهمة essential software">
+        <span class="icon">📦</span><strong>برامج مهمة</strong><small>Essential Programs</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile red" id="maintenance" href="#maintenance" data-search="ادوات الصيانة فحص pc utilities">
+        <span class="icon">🛠️</span><strong>أدوات الصيانة</strong><small>PC Utilities</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile purple" id="links" href="#links" data-search="روابط ضرورية useful links">
+        <span class="icon">🔗</span><strong>روابط ضرورية</strong><small>Useful Links</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile blue" href="#windows" data-search="ادوات ويندوز windows tools">
+        <span class="icon">🪟</span><strong>أدوات ويندوز</strong><small>Windows Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile green" href="#hardware" data-search="ادوات العتاد والفحص hardware tools">
+        <span class="icon">🧩</span><strong>أدوات العتاد والفحص</strong><small>Hardware Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile teal" href="#usb" data-search="انشاء فلاشة ويندوز bootable usb">
+        <span class="icon">💾</span><strong>إنشاء فلاشة ويندوز</strong><small>Bootable USB</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+      <a class="tile pink" href="#other" data-search="برامج اخرى tools software">
+        <span class="icon">⚙️</span><strong>أدوات وبرامج أخرى</strong><small>More Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+      </a>
+    </section>
+
+    <section class="detail-view" id="driversView" aria-live="polite">
+      <div class="back-row">
+        <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
+        <span class="pc-tag">PC DRIVERS</span>
+      </div>
+      <div class="detail-hero">
+        <div class="detail-icon">🖥️</div>
+        <h2>تعريفات الحاسبة</h2>
+        <p>اختر نوع التعريف الذي تريد إضافته أو فتحه</p>
+      </div>
+      <div class="section-head">
+        <div><h2>قائمة التعريفات</h2><p>الأزرار جاهزة، ونضيف روابط التحميل عندما ترسلها</p></div>
+      </div>
+      <div class="detail-actions">
+        <button class="detail-action" type="button" onclick="selectDriver('تعريف كرت الشاشة')"><span class="action-icon">🎮</span><strong>كرت الشاشة</strong><small>Graphics Driver</small></button>
+        <button class="detail-action" type="button" onclick="selectDriver('تعريف الصوت')"><span class="action-icon">🔊</span><strong>تعريف الصوت</strong><small>Audio Driver</small></button>
+        <button class="detail-action" type="button" onclick="selectDriver('تعريف الشبكة والإنترنت')"><span class="action-icon">🌐</span><strong>الشبكة والإنترنت</strong><small>Network Driver</small></button>
+        <button class="detail-action" type="button" onclick="selectDriver('تعريف الواي فاي')"><span class="action-icon">📶</span><strong>الواي فاي</strong><small>Wi-Fi Driver</small></button>
+        <button class="detail-action" type="button" onclick="selectDriver('تعريف البلوتوث')"><span class="action-icon">ᛒ</span><strong>البلوتوث</strong><small>Bluetooth Driver</small></button>
+        <button class="detail-action" type="button" onclick="selectDriver('تعريفات USB و Chipset')"><span class="action-icon">🔌</span><strong>USB و Chipset</strong><small>Chipset / USB</small></button>
+      </div>
+      <div class="detail-message" id="driverMessage"></div>
+    </section>
+
+    <div class="no-results" id="noResults">ما لقينا نتيجة مطابقة للبحث.</div>
+
+    <section class="remote-items" id="remoteItems"><div class="remote-head"><h2>البرامج والروابط المضافة</h2><span>LIVE DATABASE</span></div><div id="remoteItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div></section>
+    <div class="note"><b>ملاحظة:</b> هذه واجهة الصفحة الرئيسية فقط. المربعات جاهزة، وما أضفنا أي برامج أو روابط تحميل بعد؛ نضيفها من قائمتك لاحقاً.</div>
+    <footer class="footer"><span>AMJAD PROGRAMS © 2026</span><span class="rgbline"></span><span>PC FIRST • RESPONSIVE</span></footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="supabase-config.js"></script>
+<script>
+  // حماية انتقال بسيطة مرتبطة بجلسة شاشة الدخول في هذا النموذج.
+  if (sessionStorage.getItem("amjadLogin") !== "yes") {
+    window.location.replace("amjad-programs-login.html");
+  }
+
+
+  async function loadPublishedItems(){
+    const target=document.getElementById("remoteItemsGrid");
+    if(!window.AMJAD_SUPABASE_URL||!window.AMJAD_SUPABASE_ANON_KEY||window.AMJAD_SUPABASE_URL.includes("YOUR_")||window.AMJAD_SUPABASE_ANON_KEY.includes("YOUR_")){
+      target.textContent="اربط قاعدة بيانات Supabase حتى تظهر البرامج والروابط التي تضيفها من لوحة الإدارة.";return;
+    }
+    try{
+      const client=window.supabase.createClient(window.AMJAD_SUPABASE_URL,window.AMJAD_SUPABASE_ANON_KEY);
+      const {data,error}=await client.from("site_items").select("id,item_type,title,description,item_url,image_url,category,icon").eq("is_published",true).order("created_at",{ascending:false});
+      if(error)throw error;
+      if(!data||!data.length){target.textContent="لا توجد برامج منشورة حالياً. أضف أول برنامج من لوحة الإدارة.";return;}
+      target.className="remote-grid";
+      target.innerHTML=data.map(x=>{
+        const url=publicUrl(x.item_url);if(!url)return "";
+        const image=x.image_url?publicUrl(x.image_url):null;
+        return `<article class="remote-card">${image?`<img src="${image}" alt="" style="width:100%;height:105px;object-fit:contain;border-radius:9px;margin-bottom:9px">`:`<div class="r-icon">${htmlEscape(x.icon||"📦")}</div>`}<strong>${htmlEscape(x.title)}</strong><p>${htmlEscape(x.description||x.category||"")}</p><a href="${url}" target="_blank" rel="noopener noreferrer">${x.item_type==="link"?"فتح الرابط":"تحميل / زيارة"}</a></article>`;
+      }).join("");
+    }catch(e){target.textContent="تعذر تحميل المحتوى. تحقق من إعداد قاعدة البيانات.";}
+  }
+  function publicUrl(s){try{const u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:null}catch{return null}}
+  function htmlEscape(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+  loadPublishedItems();
+
+  const colors = ["#38bdf8","#fb3158","#facc15","#a78bfa","#ffffff","#4ade80"];
+  const particleLayer = document.getElementById("particles");
+  for (let i=0;i<42;i++) {
+    const p=document.createElement("i");
+    const c=colors[Math.floor(Math.random()*colors.length)];
+    p.className="particle";
+    p.style.left=Math.random()*100+"%";
+    p.style.animationDuration=(6+Math.random()*10)+"s";
+    p.style.animationDelay=(-Math.random()*14)+"s";
+    p.style.background=c;
+    p.style.boxShadow="0 0 11px 2px "+c;
+    p.style.width=(2+Math.random()*2)+"px";
+    p.style.height=p.style.width;
+    particleLayer.appendChild(p);
+  }
+
+  const search=document.getElementById("search");
+  const tiles=[...document.querySelectorAll(".tile")];
+  const noResults=document.getElementById("noResults");
+
+  const dashboardHero = document.querySelector(".hero");
+  const sectionHead = document.querySelector(".main > .section-head");
+  const tileGrid = document.getElementById("tileGrid");
+  const detailView = document.getElementById("driversView");
+  const noResultsEl = document.getElementById("noResults");
+  const noteEl = document.querySelector(".note");
+  const footerEl = document.querySelector(".footer");
+
+  document.querySelector('[data-open="drivers"]').addEventListener("click", (event) => {
+    event.preventDefault();
+    showDrivers();
+  });
+
+  function showDrivers(){
+    dashboardHero.style.display = "none";
+    sectionHead.style.display = "none";
+    tileGrid.style.display = "none";
+    noResultsEl.style.display = "none";
+    if(noteEl) noteEl.style.display = "none";
+    detailView.classList.add("active");
+    document.getElementById("search").value = "";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function showDashboard(){
+    detailView.classList.remove("active");
+    dashboardHero.style.display = "";
+    sectionHead.style.display = "";
+    tileGrid.style.display = "";
+    if(noteEl) noteEl.style.display = "";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function selectDriver(name){
+    const box = document.getElementById("driverMessage");
+    box.textContent = "تم اختيار: " + name + ". هذا الزر جاهز؛ أرسل اسم التعريف ورابط التحميل الذي تريده حتى نضيفه هنا.";
+    box.classList.add("show");
+  }
+
+  search.addEventListener("input",()=>{
+    const q=search.value.trim().toLowerCase();
+    let visible=0;
+    tiles.forEach(tile=>{
+      const match=(tile.dataset.search+" "+tile.innerText).toLowerCase().includes(q);
+      tile.style.display=match?"flex":"none";
+      if(match) visible++;
+    });
+    noResults.style.display=visible?"none":"block";
+  });
+</script>
+</body>
+</html>

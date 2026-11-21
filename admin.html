@@ -1,0 +1,66 @@
+<!doctype html><html lang="ar" dir="rtl"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#070914"><title>AMJAD ADMIN</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:#070914;color:#f8fafc;font-family:Tahoma,Arial,sans-serif}
+.bg{position:fixed;inset:0;z-index:-2;background:radial-gradient(ellipse at 15% 15%,#ef23452b,transparent 34%),radial-gradient(ellipse at 85% 75%,#2563eb38,transparent 35%),#070914}
+.grid{position:fixed;inset:0;z-index:-1;opacity:.1;background-image:linear-gradient(#94a3b8 1px,transparent 1px),linear-gradient(90deg,#94a3b8 1px,transparent 1px);background-size:45px 45px}
+.wrap{width:min(1050px,94%);margin:30px auto}.brand{text-align:center;margin-bottom:25px}.brand h1{margin:0;font-size:clamp(28px,5vw,43px);direction:ltr;background:linear-gradient(90deg,#ff315b,#ffe34a,#26d9ff,#b16cff);background-size:250%;color:transparent;background-clip:text;animation:rgb 5s linear infinite}@keyframes rgb{to{background-position:250%}}
+.brand p,.muted{color:#9aa9c3;font-size:12px;line-height:1.8}.panel{background:#0d1429ef;border:1px solid #ffffff20;border-radius:20px;padding:22px;box-shadow:0 0 35px #2563eb20;margin-bottom:18px}
+h2{font-size:19px;margin:0 0 15px}label{display:block;color:#b9c7dc;font-size:12px;margin:12px 0 7px}
+input,textarea,select{width:100%;padding:13px;border-radius:10px;border:1px solid #344563;background:#070d1d;color:white;outline:none;font:inherit;font-size:13px}
+textarea{min-height:75px;resize:vertical}input:focus,textarea:focus,select:focus{border-color:#38bdf8;box-shadow:0 0 0 3px #38bdf81c}
+.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}.full{grid-column:1/-1}
+button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:bold;cursor:pointer}.primary{color:white;background:linear-gradient(100deg,#e11d48,#2563eb)}.secondary{color:#dbeafe;background:#172642;border:1px solid #45618c}.danger{color:#fecdd3;background:#451521;border:1px solid #9f2944}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.hidden{display:none!important}.notice{margin-top:12px;padding:11px;border-radius:10px;background:#14233c;color:#b9d8ff;font-size:12px;line-height:1.8;white-space:pre-wrap}.notice.error{background:#351722;color:#fecdd3}.notice.ok{background:#123326;color:#bbf7d0}
+.row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.item{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #ffffff13}.item:last-child{border:0}.ico{font-size:25px;width:40px;text-align:center}.info{min-width:0;flex:1}.info strong{display:block;font-size:13px}.info small{display:block;color:#91a1bb;font-size:11px;margin-top:5px;overflow-wrap:anywhere}.item-actions{display:flex;gap:6px}.item-actions button{padding:8px 10px;font-size:11px}
+@media(max-width:650px){.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.panel{padding:16px}.item{flex-wrap:wrap;align-items:flex-start}.item-actions{width:100%;padding-right:50px}}
+</style></head><body><div class="bg"></div><div class="grid"></div><main class="wrap">
+<header class="brand"><h1>AMJAD ADMIN</h1><p>لوحة إدارة أمجد للبرامج • المدير فقط</p></header>
+<section class="panel" id="loginPanel"><h2>دخول المدير</h2><p class="muted">استخدم بريد المدير وكلمة مروره المنشأين في Supabase. هذا حساب مستقل عن رمز دخول زوار الموقع.</p>
+<label>البريد الإلكتروني</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com">
+<label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة مرور المدير">
+<div class="actions"><button class="primary" id="loginBtn">دخول لوحة الإدارة</button></div><div id="loginMsg" class="notice hidden"></div></section>
+<div id="adminArea" class="hidden">
+<section class="panel"><div class="row"><div><h2 id="formTitle">إضافة برنامج أو رابط</h2><p class="muted">أضف المحتوى وحدد مكان ظهوره، أو اتركه مخفياً كمسودة.</p></div><button class="secondary" id="logoutBtn">تسجيل الخروج</button></div>
+<form id="itemForm"><input type="hidden" id="itemId"><div class="formgrid">
+<div><label>نوع المحتوى</label><select id="itemType"><option value="program">برنامج</option><option value="link">رابط ضروري</option></select></div>
+<div><label>مكان الظهور</label><select id="category"><option value="drivers">تعريفات الحاسبة</option><option value="essential">برامج مهمة</option><option value="maintenance">أدوات الصيانة</option><option value="links">روابط ضرورية</option><option value="windows">أدوات ويندوز</option><option value="hardware">أدوات العتاد والفحص</option><option value="usb">إنشاء فلاشة ويندوز</option><option value="other">أدوات وبرامج أخرى</option></select></div>
+<div class="full"><label>اسم البرنامج أو الرابط</label><input id="title" required maxlength="120" placeholder="مثال: تعريف كرت الشاشة NVIDIA"></div>
+<div class="full"><label>الوصف</label><textarea id="description" maxlength="500" placeholder="وصف مختصر"></textarea></div>
+<div class="full"><label>رابط التحميل أو الموقع</label><input id="itemUrl" type="url" required placeholder="https://..."></div>
+<div class="full"><label>رابط صورة (اختياري)</label><input id="imageUrl" type="url" placeholder="https://..."></div>
+<div><label>أيقونة أو إيموجي</label><input id="icon" maxlength="8" value="📦"></div>
+<div><label>حالة النشر</label><select id="published"><option value="true">منشور للزوار</option><option value="false">مسودة / مخفي</option></select></div>
+</div><div class="actions"><button class="primary" type="submit" id="saveBtn">حفظ المحتوى</button><button class="secondary hidden" type="button" id="cancelEdit">إلغاء التعديل</button></div><div id="formMsg" class="notice hidden"></div></form></section>
+<section class="panel"><div class="row"><h2>البرامج والروابط الموجودة</h2><button class="secondary" id="refreshBtn">تحديث القائمة</button></div><div id="itemsList" class="muted">جاري التحميل...</div></section>
+</div></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script src="supabase-config.js"></script>
+<script>
+const $=id=>document.getElementById(id);let sb=null,items=[];
+function msg(id,t,kind=""){const e=$(id);e.textContent=t;e.className="notice"+(kind?" "+kind:"");e.classList.remove("hidden")}
+function hide(id){$(id).classList.add("hidden")}
+function esc(s=""){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function urlOK(s){try{let u=new URL(s);return ["http:","https:"].includes(u.protocol)?u.href:null}catch{return null}}
+function ready(){return window.AMJAD_SUPABASE_URL&&!window.AMJAD_SUPABASE_URL.includes("YOUR_")&&window.AMJAD_SUPABASE_ANON_KEY&&!window.AMJAD_SUPABASE_ANON_KEY.includes("YOUR_")}
+async function init(){if(!ready()){msg("loginMsg","أكمل إعداد supabase-config.js أولاً بوضع Project URL و anon/public key.");return}
+sb=window.supabase.createClient(window.AMJAD_SUPABASE_URL,window.AMJAD_SUPABASE_ANON_KEY);let {data:{session}}=await sb.auth.getSession();if(session)await enter()}
+async function enter(){let {data:{user}}=await sb.auth.getUser();if(!user)return;
+let {data:admin,error}=await sb.from("admin_users").select("user_id").eq("user_id",user.id).maybeSingle();
+if(error||!admin){await sb.auth.signOut();msg("loginMsg","هذا الحساب غير مسجل كمدير مخوّل.","error");return}
+$("loginPanel").classList.add("hidden");$("adminArea").classList.remove("hidden");await load()}
+$("loginBtn").onclick=async()=>{hide("loginMsg");if(!sb){await init();if(!sb)return}let {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error){msg("loginMsg","فشل الدخول: "+error.message,"error");return}await enter()};
+$("logoutBtn").onclick=async()=>{await sb.auth.signOut();$("adminArea").classList.add("hidden");$("loginPanel").classList.remove("hidden");$("password").value=""};
+async function load(){ $("itemsList").textContent="جاري التحميل...";let {data,error}=await sb.from("site_items").select("*").order("created_at",{ascending:false});if(error){$("itemsList").textContent="تعذر التحميل: "+error.message;return}items=data||[];if(!items.length){$("itemsList").textContent="لا توجد عناصر بعد.";return}
+$("itemsList").innerHTML=items.map(x=>`<div class="item"><div class="ico">${esc(x.icon||"📦")}</div><div class="info"><strong>${esc(x.title)}${x.is_published?"":" — مخفي"}</strong><small>${esc(x.category)} • ${esc(x.item_type)} • ${esc(x.item_url)}</small></div><div class="item-actions"><button class="secondary" data-edit="${x.id}">تعديل</button><button class="danger" data-del="${x.id}">حذف</button></div></div>`).join("");
+$("itemsList").querySelectorAll("[data-edit]").forEach(b=>b.onclick=()=>edit(b.dataset.edit));$("itemsList").querySelectorAll("[data-del]").forEach(b=>b.onclick=()=>del(b.dataset.del))}
+function reset(){ $("itemForm").reset();$("itemId").value="";$("icon").value="📦";$("published").value="true";$("formTitle").textContent="إضافة برنامج أو رابط";$("saveBtn").textContent="حفظ المحتوى";$("cancelEdit").classList.add("hidden");hide("formMsg")}
+function edit(id){let x=items.find(i=>String(i.id)===String(id));if(!x)return;$("itemId").value=x.id;$("itemType").value=x.item_type;$("category").value=x.category;$("title").value=x.title;$("description").value=x.description||"";$("itemUrl").value=x.item_url;$("imageUrl").value=x.image_url||"";$("icon").value=x.icon||"📦";$("published").value=String(x.is_published);$("formTitle").textContent="تعديل المحتوى";$("saveBtn").textContent="حفظ التعديلات";$("cancelEdit").classList.remove("hidden");window.scrollTo({top:0,behavior:"smooth"})}
+$("cancelEdit").onclick=reset;
+$("itemForm").onsubmit=async e=>{e.preventDefault();hide("formMsg");let item_url=urlOK($("itemUrl").value.trim()),raw=$("imageUrl").value.trim(),image_url=raw?urlOK(raw):"";if(!item_url|| (raw&&!image_url)){msg("formMsg","تحقق من روابط http أو https.","error");return}
+let payload={item_type:$("itemType").value,category:$("category").value,title:$("title").value.trim(),description:$("description").value.trim(),item_url,image_url,icon:$("icon").value.trim()||"📦",is_published:$("published").value==="true",updated_at:new Date().toISOString()};
+let result=$("itemId").value?await sb.from("site_items").update(payload).eq("id",Number($("itemId").value)):await sb.from("site_items").insert(payload);
+if(result.error){msg("formMsg","تعذر الحفظ: "+result.error.message,"error");return}msg("formMsg","تم الحفظ بنجاح.","ok");reset();await load()};
+async function del(id){let x=items.find(i=>String(i.id)===String(id));if(!x||!confirm("حذف "+x.title+"؟"))return;let {error}=await sb.from("site_items").delete().eq("id",Number(id));if(error){alert("تعذر الحذف: "+error.message);return}await load()}
+$("refreshBtn").onclick=load;init();
+</script></body></html>
