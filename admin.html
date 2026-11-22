@@ -20,7 +20,7 @@ button{border:0;border-radius:10px;padding:11px 16px;font:inherit;font-weight:bo
 <section class="panel" id="loginPanel"><h2>دخول المدير</h2><p class="muted">استخدم بريد المدير وكلمة مروره المنشأين في Supabase. هذا حساب مستقل عن رمز دخول زوار الموقع.</p>
 <label>البريد الإلكتروني</label><input id="email" type="email" autocomplete="username" placeholder="admin@example.com">
 <label>كلمة المرور</label><input id="password" type="password" autocomplete="current-password" placeholder="كلمة مرور المدير">
-<div class="actions"><button class="primary" id="loginBtn">دخول لوحة الإدارة</button></div><div id="loginMsg" class="notice hidden"></div></section>
+<div class="actions"><button class="primary" id="loginBtn">دخول لوحة الإدارة</button><button class="secondary" type="button" id="forgotBtn">نسيت كلمة المرور؟</button></div><div id="loginMsg" class="notice hidden"></div></section>
 <div id="adminArea" class="hidden">
 <section class="panel"><div class="row"><div><h2 id="formTitle">إضافة برنامج أو رابط</h2><p class="muted">أضف المحتوى وحدد مكان ظهوره، أو اتركه مخفياً كمسودة.</p></div><button class="secondary" id="logoutBtn">تسجيل الخروج</button></div>
 <form id="itemForm"><input type="hidden" id="itemId"><div class="formgrid">
@@ -50,6 +50,16 @@ let {data:admin,error}=await sb.from("admin_users").select("user_id").eq("user_i
 if(error||!admin){await sb.auth.signOut();msg("loginMsg","هذا الحساب غير مسجل كمدير مخوّل.","error");return}
 $("loginPanel").classList.add("hidden");$("adminArea").classList.remove("hidden");await load()}
 $("loginBtn").onclick=async()=>{hide("loginMsg");if(!sb){await init();if(!sb)return}let {error}=await sb.auth.signInWithPassword({email:$("email").value.trim(),password:$("password").value});if(error){msg("loginMsg","فشل الدخول: "+error.message,"error");return}await enter()};
+$("forgotBtn").onclick=async()=>{
+ hide("loginMsg");
+ if(!sb){await init();if(!sb)return}
+ const email=$("email").value.trim();
+ if(!email){msg("loginMsg","اكتب بريد المدير أولاً، ثم اضغط نسيت كلمة المرور.","error");$("email").focus();return}
+ const redirectTo=new URL("reset-password.html",window.location.href).href;
+ const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});
+ if(error){msg("loginMsg","تعذر إرسال رابط الاستعادة: "+error.message,"error");return}
+ msg("loginMsg","تم طلب رابط الاستعادة. افحص بريد المدير وافتح الرابط لإكمال تغيير كلمة المرور.","ok");
+};
 $("logoutBtn").onclick=async()=>{await sb.auth.signOut();$("adminArea").classList.add("hidden");$("loginPanel").classList.remove("hidden");$("password").value=""};
 async function load(){ $("itemsList").textContent="جاري التحميل...";let {data,error}=await sb.from("site_items").select("*").order("created_at",{ascending:false});if(error){$("itemsList").textContent="تعذر التحميل: "+error.message;return}items=data||[];if(!items.length){$("itemsList").textContent="لا توجد عناصر بعد.";return}
 $("itemsList").innerHTML=items.map(x=>`<div class="item"><div class="ico">${esc(x.icon||"📦")}</div><div class="info"><strong>${esc(x.title)}${x.is_published?"":" — مخفي"}</strong><small>${esc(x.category)} • ${esc(x.item_type)} • ${esc(x.item_url)}</small></div><div class="item-actions"><button class="secondary" data-edit="${x.id}">تعديل</button><button class="danger" data-del="${x.id}">حذف</button></div></div>`).join("");
