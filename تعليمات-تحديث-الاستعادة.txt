@@ -1,0 +1,28 @@
+تحديث استعادة كلمة مرور المدير - AMJAD PROGRAMS
+
+ارفع هذين الملفين إلى جذر مستودع GitHub نفسه داخل مجلد 11:
+1) admin.html
+2) reset-password.html
+
+استبدل الملفين القديمين بالملفين الجديدين، ثم Commit changes.
+لا تحذف supabase-config.js أو index.html أو amjad-programs-login.html.
+
+إعداد Supabase:
+Authentication > URL Configuration
+Site URL:
+https://mr20amjed-blip.github.io/11/
+
+Redirect URLs يجب أن تحتوي:
+https://mr20amjed-blip.github.io/11/reset-password.html
+
+قالب رسالة Reset password:
+يجب أن يحتوي رابط الاستعادة على {{ .ConfirmationURL }}. لا تستبدله برابط Site URL فقط.
+
+بعد الرفع:
+- انتظر حتى يتجدد حد إرسال البريد إذا ظهر Email rate limit exceeded.
+- افتح أحدث رسالة استعادة فقط؛ الروابط القديمة قد تكون منتهية أو تشير إلى الصفحة السابقة.
+- رابط صفحة التغيير المباشر:
+https://mr20amjed-blip.github.io/11/reset-password.html
+هذا الرابط وحده لا ينشئ جلسة استعادة؛ يجب فتحه عبر رابط البريد الصحيح.
+
+ملاحظة: لا تشارك service_role أو Secret API key. المفتاح Publishable/anon فقط في supabase-config.js.

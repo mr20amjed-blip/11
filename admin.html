@@ -55,10 +55,10 @@ $("forgotBtn").onclick=async()=>{
  if(!sb){await init();if(!sb)return}
  const email=$("email").value.trim();
  if(!email){msg("loginMsg","اكتب بريد المدير أولاً، ثم اضغط نسيت كلمة المرور.","error");$("email").focus();return}
- const redirectTo=new URL("reset-password.html",window.location.href).href;
+ const redirectTo="https://mr20amjed-blip.github.io/11/reset-password.html";
  const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo});
  if(error){msg("loginMsg","تعذر إرسال رابط الاستعادة: "+error.message,"error");return}
- msg("loginMsg","تم طلب رابط الاستعادة. افحص بريد المدير وافتح الرابط لإكمال تغيير كلمة المرور.","ok");
+ msg("loginMsg","تم طلب رابط الاستعادة. افتح أحدث رسالة فقط، ويجب أن ينقلك الرابط إلى صفحة تغيير كلمة المرور.","ok");
 };
 $("logoutBtn").onclick=async()=>{await sb.auth.signOut();$("adminArea").classList.add("hidden");$("loginPanel").classList.remove("hidden");$("password").value=""};
 async function load(){ $("itemsList").textContent="جاري التحميل...";let {data,error}=await sb.from("site_items").select("*").order("created_at",{ascending:false});if(error){$("itemsList").textContent="تعذر التحميل: "+error.message;return}items=data||[];if(!items.length){$("itemsList").textContent="لا توجد عناصر بعد.";return}
