@@ -157,30 +157,46 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
     </div>
 
     <section class="tiles" id="tileGrid">
-      <a class="tile cyan" id="drivers" href="#drivers" data-open="drivers" data-search="تعريفات الحاسبة اللابتوب drivers">
+      <a class="tile cyan" id="drivers" href="#drivers" data-category="drivers" data-open="drivers" data-search="تعريفات الحاسبة اللابتوب drivers">
         <span class="icon">🖥️</span><strong>تعريفات الحاسبة</strong><small>PC Drivers</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile gold" href="#essential" data-search="برامج مهمة essential software">
+      <a class="tile gold" href="#essential" data-category="essential" data-search="برامج مهمة essential software">
         <span class="icon">📦</span><strong>برامج مهمة</strong><small>Essential Programs</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile red" id="maintenance" href="#maintenance" data-search="ادوات الصيانة فحص pc utilities">
+      <a class="tile red" id="maintenance" href="#maintenance" data-category="maintenance" data-search="ادوات الصيانة فحص pc utilities">
         <span class="icon">🛠️</span><strong>أدوات الصيانة</strong><small>PC Utilities</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile purple" id="links" href="#links" data-search="روابط ضرورية useful links">
+      <a class="tile purple" id="links" href="#links" data-category="links" data-search="روابط ضرورية useful links">
         <span class="icon">🔗</span><strong>روابط ضرورية</strong><small>Useful Links</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile blue" href="#windows" data-search="ادوات ويندوز windows tools">
+      <a class="tile blue" href="#windows" data-category="windows" data-search="ادوات ويندوز windows tools">
         <span class="icon">🪟</span><strong>أدوات ويندوز</strong><small>Windows Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile green" href="#hardware" data-search="ادوات العتاد والفحص hardware tools">
+      <a class="tile green" href="#hardware" data-category="hardware" data-search="ادوات العتاد والفحص hardware tools">
         <span class="icon">🧩</span><strong>أدوات العتاد والفحص</strong><small>Hardware Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile teal" href="#usb" data-search="انشاء فلاشة ويندوز bootable usb">
+      <a class="tile teal" href="#usb" data-category="usb" data-search="انشاء فلاشة ويندوز bootable usb">
         <span class="icon">💾</span><strong>إنشاء فلاشة ويندوز</strong><small>Bootable USB</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
-      <a class="tile pink" href="#other" data-search="برامج اخرى tools software">
+      <a class="tile pink" href="#other" data-category="other" data-search="برامج اخرى tools software">
         <span class="icon">⚙️</span><strong>أدوات وبرامج أخرى</strong><small>More Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
       </a>
+    </section>
+
+    <section class="detail-view" id="categoryView" aria-live="polite">
+      <div class="back-row">
+        <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
+        <span class="pc-tag">CATEGORY CONTENT</span>
+      </div>
+      <div class="detail-hero">
+        <div class="detail-icon" id="categoryIcon">📦</div>
+        <h2 id="categoryTitle">القسم</h2>
+        <p id="categoryDescription">البرامج والأدوات الموجودة داخل هذا القسم</p>
+      </div>
+      <div class="remote-items">
+        <div class="remote-head"><h2>محتويات القسم</h2><span id="categoryCount">0 عنصر</span></div>
+        <div id="categoryItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div>
+      </div>
     </section>
 
     <section class="detail-view" id="driversView" aria-live="polite">
@@ -224,6 +240,80 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
   }
 
 
+  const categoryInfo = {
+    drivers:{title:"تعريفات الحاسبة",icon:"🖥️",desc:"تعريفات الكمبيوتر واللابتوب"},
+    essential:{title:"برامج مهمة",icon:"📦",desc:"البرامج الأساسية والمهمة"},
+    maintenance:{title:"أدوات الصيانة",icon:"🛠️",desc:"أدوات الصيانة والفحص والإصلاح"},
+    links:{title:"روابط ضرورية",icon:"🔗",desc:"مواقع وروابط مفيدة"},
+    windows:{title:"أدوات ويندوز",icon:"🪟",desc:"أدوات وإضافات نظام ويندوز"},
+    hardware:{title:"أدوات العتاد والفحص",icon:"🧩",desc:"أدوات فحص مكونات الحاسوب"},
+    usb:{title:"إنشاء فلاشة ويندوز",icon:"💾",desc:"أدوات تجهيز USB وتثبيت ويندوز"},
+    other:{title:"أدوات وبرامج أخرى",icon:"⚙️",desc:"برامج وأدوات متنوعة"}
+  };
+  let publishedItems = [];
+
+  function publicUrl(s){try{const u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:null}catch{return null}}
+  function htmlEscape(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+
+  function itemCard(x){
+    const url=publicUrl(x.item_url); if(!url)return "";
+    const image=x.image_url?publicUrl(x.image_url):null;
+    return `<article class="remote-card">${image?`<img src="${image}" alt="" loading="lazy" style="width:100%;height:105px;object-fit:contain;border-radius:9px;margin-bottom:9px">`:`<div class="r-icon">${htmlEscape(x.icon||"📦")}</div>`}<strong>${htmlEscape(x.title)}</strong><p>${htmlEscape(x.description||"")}</p><a href="${url}" target="_blank" rel="noopener noreferrer">${x.item_type==="link"?"فتح الرابط":"تحميل / زيارة"}</a></article>`;
+  }
+
+  function renderAllItems(){
+    const target=document.getElementById("remoteItemsGrid");
+    if(!publishedItems.length){target.className="remote-empty";target.textContent="لا توجد برامج منشورة حالياً.";return;}
+    target.className="remote-grid";
+    target.innerHTML=publishedItems.map(itemCard).join("") || "لا توجد روابط صالحة.";
+  }
+
+  function renderCategory(category){
+    const info=categoryInfo[category]||{title:"القسم",icon:"📦",desc:"المحتوى"};
+    const found=publishedItems.filter(x=>String(x.category||"").toLowerCase()===category);
+    document.getElementById("categoryIcon").textContent=info.icon;
+    document.getElementById("categoryTitle").textContent=info.title;
+    document.getElementById("categoryDescription").textContent=info.desc;
+    document.getElementById("categoryCount").textContent=found.length+" عنصر";
+    const grid=document.getElementById("categoryItemsGrid");
+    if(!found.length){grid.className="remote-empty";grid.textContent="ماكو محتوى منشور بهذا القسم حالياً. أضف برنامجاً من لوحة المدير واختر مكان الظهور الصحيح.";return;}
+    grid.className="remote-grid";
+    grid.innerHTML=found.map(itemCard).join("") || "لا توجد روابط صالحة.";
+  }
+
+  function showCategory(category){
+    document.querySelector(".hero").style.display="none";
+    document.querySelector(".main > .section-head").style.display="none";
+    document.getElementById("tileGrid").style.display="none";
+    document.getElementById("remoteItems").style.display="none";
+    document.querySelector(".note").style.display="none";
+    document.querySelector(".footer").style.display="none";
+    document.getElementById("driversView").classList.remove("active");
+    document.getElementById("categoryView").classList.add("active");
+    renderCategory(category);
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+
+  function showDashboard(){
+    document.getElementById("categoryView").classList.remove("active");
+    document.getElementById("driversView").classList.remove("active");
+    document.querySelector(".hero").style.display="";
+    document.querySelector(".main > .section-head").style.display="";
+    document.getElementById("tileGrid").style.display="";
+    document.getElementById("remoteItems").style.display="";
+    document.querySelector(".note").style.display="";
+    document.querySelector(".footer").style.display="";
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+  window.showDashboard=showDashboard;
+
+  document.querySelectorAll(".tile[data-category]").forEach(tile=>{
+    tile.addEventListener("click",event=>{
+      event.preventDefault();
+      showCategory(tile.dataset.category);
+    });
+  });
+
   async function loadPublishedItems(){
     const target=document.getElementById("remoteItemsGrid");
     if(!window.AMJAD_SUPABASE_URL||!window.AMJAD_SUPABASE_ANON_KEY||window.AMJAD_SUPABASE_URL.includes("YOUR_")||window.AMJAD_SUPABASE_ANON_KEY.includes("YOUR_")){
@@ -233,17 +323,10 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
       const client=window.supabase.createClient(window.AMJAD_SUPABASE_URL,window.AMJAD_SUPABASE_ANON_KEY);
       const {data,error}=await client.from("site_items").select("id,item_type,title,description,item_url,image_url,category,icon").eq("is_published",true).order("created_at",{ascending:false});
       if(error)throw error;
-      if(!data||!data.length){target.textContent="لا توجد برامج منشورة حالياً. أضف أول برنامج من لوحة الإدارة.";return;}
-      target.className="remote-grid";
-      target.innerHTML=data.map(x=>{
-        const url=publicUrl(x.item_url);if(!url)return "";
-        const image=x.image_url?publicUrl(x.image_url):null;
-        return `<article class="remote-card">${image?`<img src="${image}" alt="" style="width:100%;height:105px;object-fit:contain;border-radius:9px;margin-bottom:9px">`:`<div class="r-icon">${htmlEscape(x.icon||"📦")}</div>`}<strong>${htmlEscape(x.title)}</strong><p>${htmlEscape(x.description||x.category||"")}</p><a href="${url}" target="_blank" rel="noopener noreferrer">${x.item_type==="link"?"فتح الرابط":"تحميل / زيارة"}</a></article>`;
-      }).join("");
+      publishedItems=data||[];
+      renderAllItems();
     }catch(e){target.textContent="تعذر تحميل المحتوى. تحقق من إعداد قاعدة البيانات.";}
   }
-  function publicUrl(s){try{const u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:null}catch{return null}}
-  function htmlEscape(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
   loadPublishedItems();
 
   const colors = ["#38bdf8","#fb3158","#facc15","#a78bfa","#ffffff","#4ade80"];
@@ -265,46 +348,6 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
   const search=document.getElementById("search");
   const tiles=[...document.querySelectorAll(".tile")];
   const noResults=document.getElementById("noResults");
-
-  const dashboardHero = document.querySelector(".hero");
-  const sectionHead = document.querySelector(".main > .section-head");
-  const tileGrid = document.getElementById("tileGrid");
-  const detailView = document.getElementById("driversView");
-  const noResultsEl = document.getElementById("noResults");
-  const noteEl = document.querySelector(".note");
-  const footerEl = document.querySelector(".footer");
-
-  document.querySelector('[data-open="drivers"]').addEventListener("click", (event) => {
-    event.preventDefault();
-    showDrivers();
-  });
-
-  function showDrivers(){
-    dashboardHero.style.display = "none";
-    sectionHead.style.display = "none";
-    tileGrid.style.display = "none";
-    noResultsEl.style.display = "none";
-    if(noteEl) noteEl.style.display = "none";
-    detailView.classList.add("active");
-    document.getElementById("search").value = "";
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  function showDashboard(){
-    detailView.classList.remove("active");
-    dashboardHero.style.display = "";
-    sectionHead.style.display = "";
-    tileGrid.style.display = "";
-    if(noteEl) noteEl.style.display = "";
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-
-  function selectDriver(name){
-    const box = document.getElementById("driverMessage");
-    box.textContent = "تم اختيار: " + name + ". هذا الزر جاهز؛ أرسل اسم التعريف ورابط التحميل الذي تريده حتى نضيفه هنا.";
-    box.classList.add("show");
-  }
-
   search.addEventListener("input",()=>{
     const q=search.value.trim().toLowerCase();
     let visible=0;
