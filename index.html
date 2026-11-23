@@ -76,6 +76,7 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
 .teal{--accent:#00e4d0;--rgb:rgba(0,228,208,.18)}
 .pink{--accent:#ff55c8;--rgb:rgba(255,85,200,.18)}
 
+
 .detail-view{display:none;animation:enterView .35s ease both}
 .detail-view.active{display:block}
 @keyframes enterView{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
@@ -98,6 +99,8 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
 @media(max-width:390px){.detail-actions{grid-template-columns:1fr 1fr}.detail-action{min-height:100px}}
 
 
+
+
 .remote-items{margin-top:22px;padding:20px;border:1px solid #ffffff18;border-radius:19px;background:rgba(8,14,29,.72);box-shadow:0 0 25px #2563eb14}
 .remote-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:15px}
 .remote-head h2{font-size:18px;margin:0}.remote-head span{color:#9ab0ce;font-size:10px}
@@ -108,6 +111,7 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
 .remote-empty{color:#9aa9c3;font-size:12px;padding:10px 0}
 @media(max-width:760px){.remote-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 
+
 .note{margin-top:22px;padding:15px 18px;border:1px solid #ffffff17;border-radius:15px;background:rgba(8,14,29,.62);color:#aab6ca;font-size:12px;line-height:1.9}
 .note b{color:#facc15}
 .footer{margin-top:26px;padding:17px 8px;border-top:1px solid #ffffff18;display:flex;justify-content:space-between;gap:12px;align-items:center;color:#8492aa;font-size:11px;direction:ltr}
@@ -116,248 +120,328 @@ body{margin:0;min-height:100vh;background:var(--bg);color:#f8fafc;font-family:Ta
 @media(max-width:1100px){.tiles{grid-template-columns:repeat(3,minmax(0,1fr))}.layout{grid-template-columns:190px minmax(0,1fr);gap:16px;padding:16px}}
 @media(max-width:760px){.topbar{padding:0 16px}.layout{display:block;padding:13px}.sidebar{position:relative;top:auto;margin-bottom:14px;padding:9px}.side-brand{display:none}.nav{display:flex;overflow-x:auto;gap:5px}.nav a{white-space:nowrap;padding:10px;font-size:11px}.nav .ico{font-size:15px;width:auto}.hero{padding:26px 12px 18px}.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.tile{min-height:155px;padding:16px 9px}.tile .icon{font-size:35px}.tile strong{font-size:13px}.tile small{font-size:10px}.section-head h2{font-size:16px}.top-actions .date{display:none}}
 @media(max-width:390px){.tiles{grid-template-columns:1fr 1fr}.brand-small{font-size:15px}.arabic-title{font-size:23px}}
+
+/* Pull-lamp login overlay */
+#lampGate{position:fixed;inset:0;z-index:99999;background:#000;display:block;overflow:hidden;touch-action:none}
+#lampGate[hidden]{display:none}
+#lampRig{position:absolute;top:0;left:50%;width:210px;height:150px;transform:translateX(-50%);transform-origin:50% 20px;transition:transform .18s}
+#lampRig .mount{position:absolute;top:0;left:50%;transform:translateX(-50%);width:42px;height:8px;background:linear-gradient(#555,#171717);border-radius:0 0 5px 5px}
+#lampRig .wire{position:absolute;top:7px;left:50%;transform:translateX(-50%);height:45px;width:3px;background:linear-gradient(90deg,#222,#888,#222)}
+#lampRig .shade{position:absolute;top:47px;left:50%;transform:translateX(-50%);width:112px;height:57px;background:linear-gradient(90deg,#171717,#555 48%,#111);clip-path:polygon(27% 0,73% 0,100% 100%,0 100%);filter:drop-shadow(0 5px 7px #000)}
+#lampRig .bulb{position:absolute;top:62px;left:50%;transform:translateX(-50%);width:30px;height:34px;border-radius:50% 50% 42% 42%;background:#282828;border:2px solid #555;transition:.2s;z-index:2}
+#lampRig .bulb:after{content:"";position:absolute;bottom:-4px;left:8px;width:10px;height:6px;background:#555;border-radius:1px}
+#lampPull{position:absolute;top:54px;left:calc(50% + 72px);width:48px;height:125px;z-index:3;touch-action:none;cursor:grab}
+#lampCord{position:absolute;top:0;left:50%;width:2px;height:35px;background:linear-gradient(90deg,#222,#999,#222);transform:translateX(-50%)}
+#lampHandle{position:absolute;top:31px;left:50%;width:13px;height:17px;transform:translateX(-50%);border-radius:5px 5px 7px 7px;background:linear-gradient(90deg,#777,#ddd,#555)}
+#lampSpot{display:none;position:absolute;inset:0;pointer-events:none}
+#lampSpot .beam{position:absolute;top:112px;left:50%;transform:translateX(-50%);width:min(92vw,900px);height:min(80vh,760px);background:linear-gradient(to bottom,rgba(255,218,139,.27),rgba(255,215,135,.13) 48%,rgba(255,220,155,.06));clip-path:polygon(45% 0,55% 0,100% 100%,0 100%)}
+#lampSpot .pool{position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:min(78vw,680px);height:min(56vh,480px);border-radius:50%;background:radial-gradient(ellipse,rgba(255,224,164,.20),rgba(255,213,135,.10) 48%,transparent 75%);filter:blur(8px)}
+#lampCard{display:none;position:absolute;z-index:5;left:50%;top:54%;transform:translate(-50%,-50%);width:min(88vw,390px);padding:34px 28px 30px;border:1px solid rgba(255,225,164,.55);border-radius:20px;background:linear-gradient(145deg,rgba(27,23,17,.94),rgba(7,7,7,.96));box-shadow:0 0 45px rgba(255,206,113,.26),inset 0 0 25px rgba(255,222,158,.05);text-align:center;color:#fff;font-family:Tahoma,Arial,sans-serif}
+#lampCard h2{font-size:23px;margin:0 0 25px;color:#ffe3a0}
+#lampPassWrap{position:relative}
+#lampPass{width:100%;height:52px;border-radius:11px;border:1px solid rgba(255,221,154,.55);background:#090909;color:#fff;padding:0 48px 0 15px;font-size:18px;text-align:center;outline:none}
+#lampToggle{position:absolute;right:9px;top:8px;width:36px;height:36px;border:0;background:transparent;color:#e9bd58;font-size:19px;cursor:pointer}
+#lampEnter{width:100%;height:50px;margin-top:18px;border:0;border-radius:11px;background:linear-gradient(135deg,#f7d985,#bd8830);color:#211707;font-size:17px;font-weight:bold;cursor:pointer}
+#lampMessage{min-height:18px;margin-top:10px;color:#ffd98a;font-size:12px}
+#lampGate.on #lampSpot,#lampGate.on #lampCard{display:block}
+#lampGate.on #lampRig .bulb{background:#ffd875;border-color:#fff0b5;box-shadow:0 0 9px 5px #ffd36a,0 0 25px 12px rgba(255,191,75,.85)}
+@media(max-height:600px){#lampCard{top:57%;padding:22px 24px}#lampCard h2{margin-bottom:15px}}
+
 </style>
 </head>
 <body>
+
+<div id="lampGate" aria-label="تسجيل الدخول">
+  <div id="lampRig" aria-hidden="true"><div class="mount"></div><div class="wire"></div><div class="shade"></div><div class="bulb"></div></div>
+  <div id="lampPull" role="button" aria-label="اسحب الخيط لتشغيل المصباح"><div id="lampCord"></div><div id="lampHandle"></div></div>
+  <div id="lampSpot" aria-hidden="true"><div class="beam"></div><div class="pool"></div></div>
+  <section id="lampCard"><h2>أدخل الرقم السري</h2><div id="lampPassWrap"><input id="lampPass" type="password" autocomplete="current-password" aria-label="الرقم السري"><button id="lampToggle" type="button" aria-label="إظهار أو إخفاء الرمز">◉</button></div><button id="lampEnter" type="button">دخول</button><div id="lampMessage" role="status" aria-live="polite"></div></section>
+</div>
+<div id="siteContent" style="display:none">
+
 <div class="ambient"></div><div class="gridbg"></div>
 <div class="glow r"></div><div class="glow b"></div><div class="glow y"></div>
 <div class="particles" id="particles"></div>
 
+
 <header class="topbar">
-  <div class="brand-small">AMJAD PROGRAMS</div>
-  <div class="top-actions"><span class="date">بوابة البرامج والأدوات للحاسوب</span><span class="status">● SYSTEM ONLINE</span></div>
+ <div class="brand-small">AMJAD PROGRAMS</div>
+ <div class="top-actions"><span class="date">بوابة البرامج والأدوات للحاسوب</span><span class="status">● SYSTEM ONLINE</span></div>
 </header>
 
+
 <div class="layout">
-  <aside class="sidebar">
-    <div class="side-brand"><div class="mark">💠</div><strong>AMJAD PROGRAMS</strong><small>مركز البرامج والأدوات</small></div>
-    <nav class="nav">
-      <a class="active" href="#home"><span class="ico">⌂</span> الرئيسية</a>
-      <a href="#tools"><span class="ico">▦</span> جميع الأدوات</a>
-      <a href="#drivers"><span class="ico">⇩</span> التعريفات</a>
-      <a href="#maintenance"><span class="ico">⚒</span> أدوات الصيانة</a>
-      <a href="#links"><span class="ico">↗</span> روابط ضرورية</a>
-    </nav>
-  </aside>
+ <aside class="sidebar">
+ <div class="side-brand"><div class="mark">💠</div><strong>AMJAD PROGRAMS</strong><small>مركز البرامج والأدوات</small></div>
+ <nav class="nav">
+ <a class="active" href="#home"><span class="ico">⌂</span> الرئيسية</a>
+ <a href="#tools"><span class="ico">▦</span> جميع الأدوات</a>
+ <a href="#drivers"><span class="ico">⇩</span> التعريفات</a>
+ <a href="#maintenance"><span class="ico">⚒</span> أدوات الصيانة</a>
+ <a href="#links"><span class="ico">↗</span> روابط ضرورية</a>
+ </nav>
+ </aside>
 
-  <main class="main" id="home">
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="crown">♛</div>
-        <h1>AMJAD PROGRAMS</h1>
-        <div class="arabic-title">أمجد للبرامج</div>
-        <div class="tagline">PC SOFTWARE <b>•</b> TOOLS <b>•</b> DRIVERS <b>•</b> USEFUL LINKS</div>
-        <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن أداة أو تعريف أو برنامج..." autocomplete="off"></label>
-      </div>
-    </section>
 
-    <div class="section-head" id="tools">
-      <div><h2>مركز البرامج والأدوات</h2><p>اختر الواجهة المناسبة، وسنضيف محتواها حسب قائمتك</p></div>
-      <span class="pc-tag">▣ DESKTOP EXPERIENCE</span>
-    </div>
+ <main class="main" id="home">
+ <section class="hero">
+ <div class="hero-inner">
+ <div class="crown">♛</div>
+ <h1>AMJAD PROGRAMS</h1>
+ <div class="arabic-title">أمجد للبرامج</div>
+ <div class="tagline">PC SOFTWARE <b>•</b> TOOLS <b>•</b> DRIVERS <b>•</b> USEFUL LINKS</div>
+ <label class="search-wrap"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن أداة أو تعريف أو برنامج..." autocomplete="off"></label>
+ </div>
+ </section>
 
-    <section class="tiles" id="tileGrid">
-      <a class="tile cyan" id="drivers" href="#drivers" data-category="drivers" data-open="drivers" data-search="تعريفات الحاسبة اللابتوب drivers">
-        <span class="icon">🖥️</span><strong>تعريفات الحاسبة</strong><small>PC Drivers</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile gold" href="#essential" data-category="essential" data-search="برامج مهمة essential software">
-        <span class="icon">📦</span><strong>برامج مهمة</strong><small>Essential Programs</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile red" id="maintenance" href="#maintenance" data-category="maintenance" data-search="ادوات الصيانة فحص pc utilities">
-        <span class="icon">🛠️</span><strong>أدوات الصيانة</strong><small>PC Utilities</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile purple" id="links" href="#links" data-category="links" data-search="روابط ضرورية useful links">
-        <span class="icon">🔗</span><strong>روابط ضرورية</strong><small>Useful Links</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile blue" href="#windows" data-category="windows" data-search="ادوات ويندوز windows tools">
-        <span class="icon">🪟</span><strong>أدوات ويندوز</strong><small>Windows Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile green" href="#hardware" data-category="hardware" data-search="ادوات العتاد والفحص hardware tools">
-        <span class="icon">🧩</span><strong>أدوات العتاد والفحص</strong><small>Hardware Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile teal" href="#usb" data-category="usb" data-search="انشاء فلاشة ويندوز bootable usb">
-        <span class="icon">💾</span><strong>إنشاء فلاشة ويندوز</strong><small>Bootable USB</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-      <a class="tile pink" href="#other" data-category="other" data-search="برامج اخرى tools software">
-        <span class="icon">⚙️</span><strong>أدوات وبرامج أخرى</strong><small>More Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
-      </a>
-    </section>
 
-    <section class="detail-view" id="categoryView" aria-live="polite">
-      <div class="back-row">
-        <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
-        <span class="pc-tag">CATEGORY CONTENT</span>
-      </div>
-      <div class="detail-hero">
-        <div class="detail-icon" id="categoryIcon">📦</div>
-        <h2 id="categoryTitle">القسم</h2>
-        <p id="categoryDescription">البرامج والأدوات الموجودة داخل هذا القسم</p>
-      </div>
-      <div class="remote-items">
-        <div class="remote-head"><h2>محتويات القسم</h2><span id="categoryCount">0 عنصر</span></div>
-        <div id="categoryItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div>
-      </div>
-    </section>
+ <div class="section-head" id="tools">
+ <div><h2>مركز البرامج والأدوات</h2><p>اختر الواجهة المناسبة، وسنضيف محتواها حسب قائمتك</p></div>
+ <span class="pc-tag">▣ DESKTOP EXPERIENCE</span>
+ </div>
 
-    <section class="detail-view" id="driversView" aria-live="polite">
-      <div class="back-row">
-        <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
-        <span class="pc-tag">PC DRIVERS</span>
-      </div>
-      <div class="detail-hero">
-        <div class="detail-icon">🖥️</div>
-        <h2>تعريفات الحاسبة</h2>
-        <p>اختر نوع التعريف الذي تريد إضافته أو فتحه</p>
-      </div>
-      <div class="section-head">
-        <div><h2>قائمة التعريفات</h2><p>الأزرار جاهزة، ونضيف روابط التحميل عندما ترسلها</p></div>
-      </div>
-      <div class="detail-actions">
-        <button class="detail-action" type="button" onclick="selectDriver('تعريف كرت الشاشة')"><span class="action-icon">🎮</span><strong>كرت الشاشة</strong><small>Graphics Driver</small></button>
-        <button class="detail-action" type="button" onclick="selectDriver('تعريف الصوت')"><span class="action-icon">🔊</span><strong>تعريف الصوت</strong><small>Audio Driver</small></button>
-        <button class="detail-action" type="button" onclick="selectDriver('تعريف الشبكة والإنترنت')"><span class="action-icon">🌐</span><strong>الشبكة والإنترنت</strong><small>Network Driver</small></button>
-        <button class="detail-action" type="button" onclick="selectDriver('تعريف الواي فاي')"><span class="action-icon">📶</span><strong>الواي فاي</strong><small>Wi-Fi Driver</small></button>
-        <button class="detail-action" type="button" onclick="selectDriver('تعريف البلوتوث')"><span class="action-icon">ᛒ</span><strong>البلوتوث</strong><small>Bluetooth Driver</small></button>
-        <button class="detail-action" type="button" onclick="selectDriver('تعريفات USB و Chipset')"><span class="action-icon">🔌</span><strong>USB و Chipset</strong><small>Chipset / USB</small></button>
-      </div>
-      <div class="detail-message" id="driverMessage"></div>
-    </section>
 
-    <div class="no-results" id="noResults">ما لقينا نتيجة مطابقة للبحث.</div>
+ <section class="tiles" id="tileGrid">
+ <a class="tile cyan" id="drivers" href="#drivers" data-category="drivers" data-open="drivers" data-search="تعريفات الحاسبة اللابتوب drivers">
+ <span class="icon">🖥️</span><strong>تعريفات الحاسبة</strong><small>PC Drivers</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile gold" href="#essential" data-category="essential" data-search="برامج مهمة essential software">
+ <span class="icon">📦</span><strong>برامج مهمة</strong><small>Essential Programs</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile red" id="maintenance" href="#maintenance" data-category="maintenance" data-search="ادوات الصيانة فحص pc utilities">
+ <span class="icon">🛠️</span><strong>أدوات الصيانة</strong><small>PC Utilities</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile purple" id="links" href="#links" data-category="links" data-search="روابط ضرورية useful links">
+ <span class="icon">🔗</span><strong>روابط ضرورية</strong><small>Useful Links</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile blue" href="#windows" data-category="windows" data-search="ادوات ويندوز windows tools">
+ <span class="icon">🪟</span><strong>أدوات ويندوز</strong><small>Windows Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile green" href="#hardware" data-category="hardware" data-search="ادوات العتاد والفحص hardware tools">
+ <span class="icon">🧩</span><strong>أدوات العتاد والفحص</strong><small>Hardware Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile teal" href="#usb" data-category="usb" data-search="انشاء فلاشة ويندوز bootable usb">
+ <span class="icon">💾</span><strong>إنشاء فلاشة ويندوز</strong><small>Bootable USB</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ <a class="tile pink" href="#other" data-category="other" data-search="برامج اخرى tools software">
+ <span class="icon">⚙️</span><strong>أدوات وبرامج أخرى</strong><small>More Tools</small><span class="soon">مساحة جاهزة للإضافة</span>
+ </a>
+ </section>
 
-    <section class="remote-items" id="remoteItems"><div class="remote-head"><h2>البرامج والروابط المضافة</h2><span>LIVE DATABASE</span></div><div id="remoteItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div></section>
-    <div class="note"><b>ملاحظة:</b> هذه واجهة الصفحة الرئيسية فقط. المربعات جاهزة، وما أضفنا أي برامج أو روابط تحميل بعد؛ نضيفها من قائمتك لاحقاً.</div>
-    <footer class="footer"><span>AMJAD PROGRAMS © 2026</span><span class="rgbline"></span><span>PC FIRST • RESPONSIVE</span></footer>
-  </main>
+
+ <section class="detail-view" id="categoryView" aria-live="polite">
+ <div class="back-row">
+ <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
+ <span class="pc-tag">CATEGORY CONTENT</span>
+ </div>
+ <div class="detail-hero">
+ <div class="detail-icon" id="categoryIcon">📦</div>
+ <h2 id="categoryTitle">القسم</h2>
+ <p id="categoryDescription">البرامج والأدوات الموجودة داخل هذا القسم</p>
+ </div>
+ <div class="remote-items">
+ <div class="remote-head"><h2>محتويات القسم</h2><span id="categoryCount">0 عنصر</span></div>
+ <div id="categoryItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div>
+ </div>
+ </section>
+
+
+ <section class="detail-view" id="driversView" aria-live="polite">
+ <div class="back-row">
+ <button class="back-btn" type="button" onclick="showDashboard()">← رجوع إلى الواجهة الرئيسية</button>
+ <span class="pc-tag">PC DRIVERS</span>
+ </div>
+ <div class="detail-hero">
+ <div class="detail-icon">🖥️</div>
+ <h2>تعريفات الحاسبة</h2>
+ <p>اختر نوع التعريف الذي تريد إضافته أو فتحه</p>
+ </div>
+ <div class="section-head">
+ <div><h2>قائمة التعريفات</h2><p>الأزرار جاهزة، ونضيف روابط التحميل عندما ترسلها</p></div>
+ </div>
+ <div class="detail-actions">
+ <button class="detail-action" type="button" onclick="selectDriver('تعريف كرت الشاشة')"><span class="action-icon">🎮</span><strong>كرت الشاشة</strong><small>Graphics Driver</small></button>
+ <button class="detail-action" type="button" onclick="selectDriver('تعريف الصوت')"><span class="action-icon">🔊</span><strong>تعريف الصوت</strong><small>Audio Driver</small></button>
+ <button class="detail-action" type="button" onclick="selectDriver('تعريف الشبكة والإنترنت')"><span class="action-icon">🌐</span><strong>الشبكة والإنترنت</strong><small>Network Driver</small></button>
+ <button class="detail-action" type="button" onclick="selectDriver('تعريف الواي فاي')"><span class="action-icon">📶</span><strong>الواي فاي</strong><small>Wi-Fi Driver</small></button>
+ <button class="detail-action" type="button" onclick="selectDriver('تعريف البلوتوث')"><span class="action-icon">ᛒ</span><strong>البلوتوث</strong><small>Bluetooth Driver</small></button>
+ <button class="detail-action" type="button" onclick="selectDriver('تعريفات USB و Chipset')"><span class="action-icon">🔌</span><strong>USB و Chipset</strong><small>Chipset / USB</small></button>
+ </div>
+ <div class="detail-message" id="driverMessage"></div>
+ </section>
+
+
+ <div class="no-results" id="noResults">ما لقينا نتيجة مطابقة للبحث.</div>
+
+
+ <section class="remote-items" id="remoteItems"><div class="remote-head"><h2>البرامج والروابط المضافة</h2><span>LIVE DATABASE</span></div><div id="remoteItemsGrid" class="remote-empty">جاري تحميل المحتوى...</div></section>
+ <div class="note"><b>ملاحظة:</b> هذه واجهة الصفحة الرئيسية فقط. المربعات جاهزة، وما أضفنا أي برامج أو روابط تحميل بعد؛ نضيفها من قائمتك لاحقاً.</div>
+ <footer class="footer"><span>AMJAD PROGRAMS © 2026</span><span class="rgbline"></span><span>PC FIRST • RESPONSIVE</span></footer>
+ </main>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="supabase-config.js"></script>
 <script>
-  // حماية انتقال بسيطة مرتبطة بجلسة شاشة الدخول في هذا النموذج.
-  if (sessionStorage.getItem("amjadLogin") !== "yes") {
-    window.location.replace("amjad-programs-login.html");
-  }
+ // تم حذف تحويل تسجيل الدخول القديم؛ شاشة المصباح تتولى الدخول الآن.
 
 
-  const categoryInfo = {
-    drivers:{title:"تعريفات الحاسبة",icon:"🖥️",desc:"تعريفات الكمبيوتر واللابتوب"},
-    essential:{title:"برامج مهمة",icon:"📦",desc:"البرامج الأساسية والمهمة"},
-    maintenance:{title:"أدوات الصيانة",icon:"🛠️",desc:"أدوات الصيانة والفحص والإصلاح"},
-    links:{title:"روابط ضرورية",icon:"🔗",desc:"مواقع وروابط مفيدة"},
-    windows:{title:"أدوات ويندوز",icon:"🪟",desc:"أدوات وإضافات نظام ويندوز"},
-    hardware:{title:"أدوات العتاد والفحص",icon:"🧩",desc:"أدوات فحص مكونات الحاسوب"},
-    usb:{title:"إنشاء فلاشة ويندوز",icon:"💾",desc:"أدوات تجهيز USB وتثبيت ويندوز"},
-    other:{title:"أدوات وبرامج أخرى",icon:"⚙️",desc:"برامج وأدوات متنوعة"}
-  };
-  let publishedItems = [];
 
-  function publicUrl(s){try{const u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:null}catch{return null}}
-  function htmlEscape(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
-  function itemCard(x){
-    const url=publicUrl(x.item_url); if(!url)return "";
-    const image=x.image_url?publicUrl(x.image_url):null;
-    return `<article class="remote-card">${image?`<img src="${image}" alt="" loading="lazy" style="width:100%;height:105px;object-fit:contain;border-radius:9px;margin-bottom:9px">`:`<div class="r-icon">${htmlEscape(x.icon||"📦")}</div>`}<strong>${htmlEscape(x.title)}</strong><p>${htmlEscape(x.description||"")}</p><a href="${url}" target="_blank" rel="noopener noreferrer">${x.item_type==="link"?"فتح الرابط":"تحميل / زيارة"}</a></article>`;
-  }
+ const categoryInfo = {
+ drivers:{title:"تعريفات الحاسبة",icon:"🖥️",desc:"تعريفات الكمبيوتر واللابتوب"},
+ essential:{title:"برامج مهمة",icon:"📦",desc:"البرامج الأساسية والمهمة"},
+ maintenance:{title:"أدوات الصيانة",icon:"🛠️",desc:"أدوات الصيانة والفحص والإصلاح"},
+ links:{title:"روابط ضرورية",icon:"🔗",desc:"مواقع وروابط مفيدة"},
+ windows:{title:"أدوات ويندوز",icon:"🪟",desc:"أدوات وإضافات نظام ويندوز"},
+ hardware:{title:"أدوات العتاد والفحص",icon:"🧩",desc:"أدوات فحص مكونات الحاسوب"},
+ usb:{title:"إنشاء فلاشة ويندوز",icon:"💾",desc:"أدوات تجهيز USB وتثبيت ويندوز"},
+ other:{title:"أدوات وبرامج أخرى",icon:"⚙️",desc:"برامج وأدوات متنوعة"}
+ };
+ let publishedItems = [];
 
-  function renderAllItems(){
-    const target=document.getElementById("remoteItemsGrid");
-    if(!publishedItems.length){target.className="remote-empty";target.textContent="لا توجد برامج منشورة حالياً.";return;}
-    target.className="remote-grid";
-    target.innerHTML=publishedItems.map(itemCard).join("") || "لا توجد روابط صالحة.";
-  }
 
-  function renderCategory(category){
-    const info=categoryInfo[category]||{title:"القسم",icon:"📦",desc:"المحتوى"};
-    const found=publishedItems.filter(x=>String(x.category||"").toLowerCase()===category);
-    document.getElementById("categoryIcon").textContent=info.icon;
-    document.getElementById("categoryTitle").textContent=info.title;
-    document.getElementById("categoryDescription").textContent=info.desc;
-    document.getElementById("categoryCount").textContent=found.length+" عنصر";
-    const grid=document.getElementById("categoryItemsGrid");
-    if(!found.length){grid.className="remote-empty";grid.textContent="ماكو محتوى منشور بهذا القسم حالياً. أضف برنامجاً من لوحة المدير واختر مكان الظهور الصحيح.";return;}
-    grid.className="remote-grid";
-    grid.innerHTML=found.map(itemCard).join("") || "لا توجد روابط صالحة.";
-  }
+ function publicUrl(s){try{const u=new URL(s);return ["https:","http:"].includes(u.protocol)?u.href:null}catch{return null}}
+ function htmlEscape(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 
-  function showCategory(category){
-    document.querySelector(".hero").style.display="none";
-    document.querySelector(".main > .section-head").style.display="none";
-    document.getElementById("tileGrid").style.display="none";
-    document.getElementById("remoteItems").style.display="none";
-    document.querySelector(".note").style.display="none";
-    document.querySelector(".footer").style.display="none";
-    document.getElementById("driversView").classList.remove("active");
-    document.getElementById("categoryView").classList.add("active");
-    renderCategory(category);
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
 
-  function showDashboard(){
-    document.getElementById("categoryView").classList.remove("active");
-    document.getElementById("driversView").classList.remove("active");
-    document.querySelector(".hero").style.display="";
-    document.querySelector(".main > .section-head").style.display="";
-    document.getElementById("tileGrid").style.display="";
-    document.getElementById("remoteItems").style.display="";
-    document.querySelector(".note").style.display="";
-    document.querySelector(".footer").style.display="";
-    window.scrollTo({top:0,behavior:"smooth"});
-  }
-  window.showDashboard=showDashboard;
+ function itemCard(x){
+ const url=publicUrl(x.item_url); if(!url)return "";
+ const image=x.image_url?publicUrl(x.image_url):null;
+ return `<article class="remote-card">${image?`<img src="${image}" alt="" loading="lazy" style="width:100%;height:105px;object-fit:contain;border-radius:9px;margin-bottom:9px">`:`<div class="r-icon">${htmlEscape(x.icon||"📦")}</div>`}<strong>${htmlEscape(x.title)}</strong><p>${htmlEscape(x.description||"")}</p><a href="${url}" target="_blank" rel="noopener noreferrer">${x.item_type==="link"?"فتح الرابط":"تحميل / زيارة"}</a></article>`;
+ }
 
-  document.querySelectorAll(".tile[data-category]").forEach(tile=>{
-    tile.addEventListener("click",event=>{
-      event.preventDefault();
-      showCategory(tile.dataset.category);
-    });
-  });
 
-  async function loadPublishedItems(){
-    const target=document.getElementById("remoteItemsGrid");
-    if(!window.AMJAD_SUPABASE_URL||!window.AMJAD_SUPABASE_ANON_KEY||window.AMJAD_SUPABASE_URL.includes("YOUR_")||window.AMJAD_SUPABASE_ANON_KEY.includes("YOUR_")){
-      target.textContent="اربط قاعدة بيانات Supabase حتى تظهر البرامج والروابط التي تضيفها من لوحة الإدارة.";return;
-    }
-    try{
-      const client=window.supabase.createClient(window.AMJAD_SUPABASE_URL,window.AMJAD_SUPABASE_ANON_KEY);
-      const {data,error}=await client.from("site_items").select("id,item_type,title,description,item_url,image_url,category,icon").eq("is_published",true).order("created_at",{ascending:false});
-      if(error)throw error;
-      publishedItems=data||[];
-      renderAllItems();
-    }catch(e){target.textContent="تعذر تحميل المحتوى. تحقق من إعداد قاعدة البيانات.";}
-  }
-  loadPublishedItems();
+ function renderAllItems(){
+ const target=document.getElementById("remoteItemsGrid");
+ if(!publishedItems.length){target.className="remote-empty";target.textContent="لا توجد برامج منشورة حالياً.";return;}
+ target.className="remote-grid";
+ target.innerHTML=publishedItems.map(itemCard).join("") || "لا توجد روابط صالحة.";
+ }
 
-  const colors = ["#38bdf8","#fb3158","#facc15","#a78bfa","#ffffff","#4ade80"];
-  const particleLayer = document.getElementById("particles");
-  for (let i=0;i<42;i++) {
-    const p=document.createElement("i");
-    const c=colors[Math.floor(Math.random()*colors.length)];
-    p.className="particle";
-    p.style.left=Math.random()*100+"%";
-    p.style.animationDuration=(6+Math.random()*10)+"s";
-    p.style.animationDelay=(-Math.random()*14)+"s";
-    p.style.background=c;
-    p.style.boxShadow="0 0 11px 2px "+c;
-    p.style.width=(2+Math.random()*2)+"px";
-    p.style.height=p.style.width;
-    particleLayer.appendChild(p);
-  }
 
-  const search=document.getElementById("search");
-  const tiles=[...document.querySelectorAll(".tile")];
-  const noResults=document.getElementById("noResults");
-  search.addEventListener("input",()=>{
-    const q=search.value.trim().toLowerCase();
-    let visible=0;
-    tiles.forEach(tile=>{
-      const match=(tile.dataset.search+" "+tile.innerText).toLowerCase().includes(q);
-      tile.style.display=match?"flex":"none";
-      if(match) visible++;
-    });
-    noResults.style.display=visible?"none":"block";
-  });
+ function renderCategory(category){
+ const info=categoryInfo[category]||{title:"القسم",icon:"📦",desc:"المحتوى"};
+ const found=publishedItems.filter(x=>String(x.category||"").toLowerCase()===category);
+ document.getElementById("categoryIcon").textContent=info.icon;
+ document.getElementById("categoryTitle").textContent=info.title;
+ document.getElementById("categoryDescription").textContent=info.desc;
+ document.getElementById("categoryCount").textContent=found.length+" عنصر";
+ const grid=document.getElementById("categoryItemsGrid");
+ if(!found.length){grid.className="remote-empty";grid.textContent="ماكو محتوى منشور بهذا القسم حالياً. أضف برنامجاً من لوحة المدير واختر مكان الظهور الصحيح.";return;}
+ grid.className="remote-grid";
+ grid.innerHTML=found.map(itemCard).join("") || "لا توجد روابط صالحة.";
+ }
+
+
+ function showCategory(category){
+ document.querySelector(".hero").style.display="none";
+ document.querySelector(".main > .section-head").style.display="none";
+ document.getElementById("tileGrid").style.display="none";
+ document.getElementById("remoteItems").style.display="none";
+ document.querySelector(".note").style.display="none";
+ document.querySelector(".footer").style.display="none";
+ document.getElementById("driversView").classList.remove("active");
+ document.getElementById("categoryView").classList.add("active");
+ renderCategory(category);
+ window.scrollTo({top:0,behavior:"smooth"});
+ }
+
+
+ function showDashboard(){
+ document.getElementById("categoryView").classList.remove("active");
+ document.getElementById("driversView").classList.remove("active");
+ document.querySelector(".hero").style.display="";
+ document.querySelector(".main > .section-head").style.display="";
+ document.getElementById("tileGrid").style.display="";
+ document.getElementById("remoteItems").style.display="";
+ document.querySelector(".note").style.display="";
+ document.querySelector(".footer").style.display="";
+ window.scrollTo({top:0,behavior:"smooth"});
+ }
+ window.showDashboard=showDashboard;
+
+
+ document.querySelectorAll(".tile[data-category]").forEach(tile=>{
+ tile.addEventListener("click",event=>{
+ event.preventDefault();
+ showCategory(tile.dataset.category);
+ });
+ });
+
+
+ async function loadPublishedItems(){
+ const target=document.getElementById("remoteItemsGrid");
+ if(!window.AMJAD_SUPABASE_URL||!window.AMJAD_SUPABASE_ANON_KEY||window.AMJAD_SUPABASE_URL.includes("YOUR_")||window.AMJAD_SUPABASE_ANON_KEY.includes("YOUR_")){
+ target.textContent="اربط قاعدة بيانات Supabase حتى تظهر البرامج والروابط التي تضيفها من لوحة الإدارة.";return;
+ }
+ try{
+ const client=window.supabase.createClient(window.AMJAD_SUPABASE_URL,window.AMJAD_SUPABASE_ANON_KEY);
+ const {data,error}=await client.from("site_items").select("id,item_type,title,description,item_url,image_url,category,icon").eq("is_published",true).order("created_at",{ascending:false});
+ if(error)throw error;
+ publishedItems=data||[];
+ renderAllItems();
+ }catch(e){target.textContent="تعذر تحميل المحتوى. تحقق من إعداد قاعدة البيانات.";}
+ }
+ loadPublishedItems();
+
+
+ const colors = ["#38bdf8","#fb3158","#facc15","#a78bfa","#ffffff","#4ade80"];
+ const particleLayer = document.getElementById("particles");
+ for (let i=0;i<42;i++) {
+ const p=document.createElement("i");
+ const c=colors[Math.floor(Math.random()*colors.length)];
+ p.className="particle";
+ p.style.left=Math.random()*100+"%";
+ p.style.animationDuration=(6+Math.random()*10)+"s";
+ p.style.animationDelay=(-Math.random()*14)+"s";
+ p.style.background=c;
+ p.style.boxShadow="0 0 11px 2px "+c;
+ p.style.width=(2+Math.random()*2)+"px";
+ p.style.height=p.style.width;
+ particleLayer.appendChild(p);
+ }
+
+
+ const search=document.getElementById("search");
+ const tiles=[...document.querySelectorAll(".tile")];
+ const noResults=document.getElementById("noResults");
+ search.addEventListener("input",()=>{
+ const q=search.value.trim().toLowerCase();
+ let visible=0;
+ tiles.forEach(tile=>{
+ const match=(tile.dataset.search+" "+tile.innerText).toLowerCase().includes(q);
+ tile.style.display=match?"flex":"none";
+ if(match) visible++;
+ });
+ noResults.style.display=visible?"none":"block";
+ });
 </script>
+
+</div><!-- /siteContent -->
+
+<script>
+(()=> {
+ const gate=document.getElementById('lampGate'), site=document.getElementById('siteContent');
+ const pull=document.getElementById('lampPull'), cord=document.getElementById('lampCord'), handle=document.getElementById('lampHandle'), rig=document.getElementById('lampRig');
+ const pass=document.getElementById('lampPass'), msg=document.getElementById('lampMessage');
+ let drag=false,startY=0,switched=false,on=false,ctx=null;
+ const threshold=66,max=88;
+ function sound(){try{ctx ||= new (window.AudioContext||window.webkitAudioContext)();if(ctx.state==='suspended')ctx.resume();const t=ctx.currentTime,o=ctx.createOscillator(),g=ctx.createGain();o.type='square';o.frequency.setValueAtTime(1150,t);o.frequency.exponentialRampToValueAtTime(420,t+.035);g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.12,t+.004);g.gain.exponentialRampToValueAtTime(.0001,t+.055);o.connect(g);g.connect(ctx.destination);o.start(t);o.stop(t+.06)}catch(e){}}
+ function light(v){on=v;gate.classList.toggle('on',v);if(v){msg.textContent='';setTimeout(()=>pass.focus({preventScroll:true}),120)}else{pass.value='';msg.textContent='';pass.blur()}}
+ function render(y){const n=Math.max(0,Math.min(max,y));cord.style.height=(35+n)+'px';handle.style.top=(31+n)+'px';rig.style.transform='translateX(-50%) rotate('+Math.min(5,n/18)+'deg)'}
+ pull.addEventListener('pointerdown',e=>{if(e.button!==undefined&&e.button!==0)return;drag=true;switched=false;startY=e.clientY;pull.setPointerCapture(e.pointerId);e.preventDefault()});
+ pull.addEventListener('pointermove',e=>{if(!drag)return;const d=Math.max(0,e.clientY-startY);render(d);if(d>=threshold&&!switched){switched=true;light(!on);sound()}e.preventDefault()});
+ function end(){if(!drag)return;drag=false;cord.style.transition='height .48s cubic-bezier(.2,1.7,.35,1)';handle.style.transition='top .48s cubic-bezier(.2,1.7,.35,1)';rig.style.transition='transform .48s cubic-bezier(.2,1.7,.35,1)';render(0);setTimeout(()=>{cord.style.transition='';handle.style.transition='';rig.style.transition=''},520)}
+ pull.addEventListener('pointerup',end);pull.addEventListener('pointercancel',end);
+ document.getElementById('lampToggle').addEventListener('click',()=>{pass.type=pass.type==='password'?'text':'password';document.getElementById('lampToggle').textContent=pass.type==='password'?'◉':'⊘';pass.focus()});
+ function enter(){if(pass.value==='Amjed'){sessionStorage.setItem('amjadLogin','yes');gate.hidden=true;site.style.display='';}else{msg.textContent='الرقم السري غير صحيح';pass.value='';pass.focus()}}
+ document.getElementById('lampEnter').addEventListener('click',enter);
+ pass.addEventListener('keydown',e=>{if(e.key==='Enter')enter()});
+ if(sessionStorage.getItem('amjadLogin')==='yes'){gate.hidden=true;site.style.display=''}
+})();
+</script>
+
 </body>
 </html>
